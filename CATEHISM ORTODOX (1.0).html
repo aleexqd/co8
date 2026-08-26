@@ -1,0 +1,3590 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Catehism Ortodox — Întrebări și răspunsuri</title>
+
+<!-- =========================================================
+     FONT PENTRU RĂSPUNSURI
+     Literata = elegant, clar și foarte potrivit pentru lectură
+     ========================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400&display=swap"
+      rel="stylesheet">
+
+
+<style>
+
+/* =========================================================
+   VARIABILE
+   ========================================================= */
+
+:root{
+
+  --royal:#1646a0;
+  --royal2:#1f5dcc;
+
+  --bg:#f4f6fa;
+  --card:#ffffff;
+
+  --text:#202733;
+  --muted:#6b7280;
+
+  --border:#e2e7ef;
+
+  --question:#142d57;
+
+  --button:#1646a0;
+
+}
+
+
+/* =========================================================
+   RESET & SCROLLBAR ELIMINARE DUBLURĂ
+   ========================================================= */
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+  overflow-y:scroll; /* Forțează o singură bară principală fluidă pe întreaga pagină */
+}
+
+body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100vh;
+  overflow:visible; /* Elimină complet a doua bară de scroll */
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  background:var(--bg);
+
+  color:var(--text);
+
+  line-height:1.75;
+
+  transition:
+    background .45s ease,
+    color .45s ease;
+
+}
+
+
+/* =========================================================
+   BARA DE PROGRES
+   ========================================================= */
+
+.progress-wrap{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:5px;
+
+  background:#dce4f2;
+
+  z-index:1000;
+
+}
+
+
+.progress-bar{
+
+  height:100%;
+
+  width:0;
+
+  background:var(--royal2);
+
+  transition:
+    width .25s ease;
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header{
+
+  height:112px;
+
+  padding:
+    27px
+    80px
+    10px
+    20px;
+
+  text-align:center;
+
+  position:relative;
+
+}
+
+
+h1{
+
+  margin:0;
+
+  color:#173b78;
+
+  font-size:
+    clamp(
+      1.6rem,
+      4vw,
+      2.4rem
+    );
+
+  transition:
+    color .4s ease;
+
+}
+
+
+.subtitle{
+
+  color:var(--muted);
+
+  margin:
+    7px
+    0
+    0;
+
+  font-family:Arial,sans-serif;
+
+  font-size:.95rem;
+
+}
+
+
+/* =========================================================
+   BUTON MOD ZI / NOAPTE
+   ========================================================= */
+
+.theme-toggle{
+
+  position:absolute;
+
+  right:22px;
+  top:24px;
+
+  width:48px;
+  height:48px;
+
+  padding:0;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(22,70,160,.18);
+
+  background:white;
+
+  color:#1646a0;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:1.35rem;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 4px 16px
+    rgba(20,45,90,.12);
+
+  transition:
+
+    background .3s ease,
+    color .3s ease,
+    transform .2s ease,
+    box-shadow .3s ease;
+
+}
+
+
+.theme-toggle:hover{
+
+  transform:scale(1.06);
+
+  background:#f0f4ff;
+
+}
+
+
+/* =========================================================
+   APLICAȚIE
+   ========================================================= */
+
+.app{
+
+  width:
+    min(
+      900px,
+      calc(100% - 28px)
+    );
+
+  margin:
+    0 auto 30px auto;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:flex-start;
+
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.card{
+
+  background:var(--card);
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:18px;
+
+  box-shadow:
+    0 8px 28px
+    rgba(20,45,90,.07);
+
+  padding:
+    clamp(
+      18px,
+      3vw,
+      34px
+    );
+
+  display:flex;
+
+  flex-direction:column;
+
+  overflow:visible;
+
+  transition:
+
+    background .4s ease,
+    border-color .4s ease,
+    box-shadow .4s ease;
+
+}
+
+
+/* =========================================================
+   META
+   ========================================================= */
+
+.meta{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:12px;
+
+  margin-bottom:12px;
+
+  font-family:Arial,sans-serif;
+
+}
+
+
+.number{
+
+  color:var(--royal);
+
+  font-weight:700;
+
+  font-size:.95rem;
+
+}
+
+
+.counter{
+
+  color:var(--muted);
+
+  font-size:.9rem;
+
+}
+
+
+/* =========================================================
+   SECȚIUNE
+   ========================================================= */
+
+.section{
+
+  color:var(--royal);
+
+  font-family:Arial,sans-serif;
+
+  font-size:.9rem;
+
+  font-weight:700;
+
+  text-transform:uppercase;
+
+  letter-spacing:.07em;
+
+  margin-bottom:9px;
+
+}
+
+
+/* =========================================================
+   ÎNTREBARE
+   ========================================================= */
+
+.question{
+
+  font-size:
+    clamp(
+      1.35rem,
+      3vw,
+      1.85rem
+    );
+
+  line-height:1.35;
+
+  margin:
+    0
+    0
+    16px;
+
+  color:var(--question);
+
+}
+
+
+/* =========================================================
+   RĂSPUNS
+   ========================================================= */
+
+.answer{
+
+  font-family:
+    "Literata",
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:.92rem;
+
+  white-space:pre-line;
+
+  line-height:1.65;
+
+  overflow:visible;
+
+  min-height:0;
+
+  transform-origin:
+    top left;
+
+  transition:
+    font-size .15s ease;
+
+}
+
+
+/* =========================================================
+   CONTROALE
+   ========================================================= */
+
+.controls{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:12px;
+
+  margin:
+    18px
+    0
+    0;
+
+  flex-wrap:wrap;
+
+}
+
+
+button{
+
+  border:0;
+
+  border-radius:10px;
+
+  padding:
+    10px
+    18px;
+
+  background:var(--button);
+
+  color:#fff;
+
+  cursor:pointer;
+
+  font-family:Arial,sans-serif;
+
+  font-weight:600;
+
+  font-size:.95rem;
+
+  transition:
+
+    .15s,
+    background .4s ease;
+
+}
+
+
+button:hover{
+
+  background:#103b8e;
+
+  transform:
+    translateY(-1px);
+
+}
+
+
+button:disabled{
+
+  background:#aeb8c8;
+
+  cursor:not-allowed;
+
+  transform:none;
+
+}
+
+
+/* =========================================================
+   PUNCTE
+   ========================================================= */
+
+.dots{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:5px;
+
+  flex-wrap:wrap;
+
+  margin:
+    12px
+    auto
+    0;
+
+  max-width:700px;
+
+}
+
+
+.dot{
+
+  width:8px;
+  height:8px;
+
+  border-radius:50%;
+
+  background:#cbd5e1;
+
+  cursor:pointer;
+
+  transition:.2s;
+
+}
+
+
+.dot.active{
+
+  background:var(--royal2);
+
+  transform:
+    scale(1.25);
+
+}
+
+
+/* =========================================================
+   MOD NOAPTE
+   ========================================================= */
+
+body.dark-mode{
+
+  --bg:#071329;
+
+  --card:#0d1b35;
+
+  --text:#e9edf7;
+
+  --muted:#aebbd2;
+
+  --border:#22375d;
+
+  --question:#f0d98a;
+
+  --button:#285fca;
+
+  background:
+
+    radial-gradient(
+      circle at 50% 0%,
+      #102c62 0%,
+      #071329 55%,
+      #050d1d 100%
+    );
+
+  color:var(--text);
+
+}
+
+
+body.dark-mode h1{
+
+  color:#f1d77b;
+
+}
+
+
+body.dark-mode .theme-toggle{
+
+  background:#102b59;
+
+  color:#f4d56c;
+
+  border-color:#35548a;
+
+  box-shadow:
+    0 4px 20px
+    rgba(0,0,0,.35);
+
+}
+
+
+body.dark-mode .card{
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(18,38,72,.98),
+      rgba(9,25,50,.98)
+    );
+
+  border-color:#263f69;
+
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.35);
+
+}
+
+
+body.dark-mode .number,
+body.dark-mode .section{
+
+  color:#d8b94f;
+
+}
+
+
+body.dark-mode .progress-wrap{
+
+  background:#142747;
+
+}
+
+
+body.dark-mode .progress-bar{
+
+  background:#d9b943;
+
+}
+
+
+body.dark-mode button{
+
+  background:#1d4fa8;
+
+}
+
+
+body.dark-mode button:hover{
+
+  background:#2865c8;
+
+}
+
+
+body.dark-mode .dot{
+
+  background:#334968;
+
+}
+
+
+body.dark-mode .dot.active{
+
+  background:#e0c14f;
+
+}
+
+
+/* =========================================================
+   CORTINA ALBASTRU REGAL + STELE AURII
+   ========================================================= */
+
+.theme-curtain{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  z-index:9999;
+
+  pointer-events:none;
+
+  transform:
+    translateY(-105%);
+
+  background:
+
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,218,82,.9) 0 1px,
+      transparent 2px
+    ),
+
+    radial-gradient(
+      circle at 75% 30%,
+      rgba(255,218,82,.9) 0 1.5px,
+      transparent 2.5px
+    ),
+
+    radial-gradient(
+      circle at 45% 65%,
+      rgba(255,218,82,.8) 0 1px,
+      transparent 2px
+    ),
+
+    radial-gradient(
+      circle at 85% 78%,
+      rgba(255,218,82,.85) 0 1.5px,
+      transparent 2.5px
+    ),
+
+    radial-gradient(
+      circle at 10% 85%,
+      rgba(255,218,82,.75) 0 1px,
+      transparent 2px
+    ),
+
+    radial-gradient(
+      circle at 60% 15%,
+      rgba(255,218,82,.85) 0 1px,
+      transparent 2px
+    ),
+
+    linear-gradient(
+      180deg,
+      #071c50 0%,
+      #103b91 45%,
+      #1646a0 100%
+    );
+
+  background-size:
+
+    170px 170px,
+    230px 230px,
+    190px 190px,
+    260px 260px,
+    210px 210px,
+    300px 300px,
+    100% 100%;
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.35);
+
+}
+
+
+.theme-curtain.play{
+
+  animation:
+    curtainNight
+    .9s
+    cubic-bezier(.77,0,.18,1)
+    forwards;
+
+}
+
+
+@keyframes curtainNight{
+
+  0%{
+
+    transform:
+      translateY(-105%);
+
+  }
+
+  45%{
+
+    transform:
+      translateY(0);
+
+  }
+
+  55%{
+
+    transform:
+      translateY(0);
+
+  }
+
+  100%{
+
+    transform:
+      translateY(105%);
+
+  }
+
+}
+
+
+/* =========================================================
+   TELEFON
+   ========================================================= */
+
+@media(max-width:600px){
+
+  header{
+
+    height:88px;
+
+    padding:
+      20px
+      70px
+      8px
+      15px;
+
+  }
+
+
+  h1{
+
+    font-size:1.45rem;
+
+  }
+
+
+  .subtitle{
+
+    font-size:.72rem;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+  }
+
+
+  .theme-toggle{
+
+    width:42px;
+    height:42px;
+
+    right:15px;
+    top:18px;
+
+    font-size:1.15rem;
+
+  }
+
+
+  .app{
+
+    width:
+      calc(100% - 18px);
+
+  }
+
+
+  .card{
+
+    padding:16px;
+
+    border-radius:15px;
+
+  }
+
+
+  .question{
+
+    font-size:1.28rem;
+
+    margin-bottom:12px;
+
+  }
+
+
+  .answer{
+
+    font-size:.92rem;
+
+    line-height:1.55;
+
+  }
+
+
+  .controls{
+
+    gap:7px;
+
+    margin-top:12px;
+
+  }
+
+
+  .controls button{
+
+    flex:1;
+
+    padding:
+      9px
+      10px;
+
+    font-size:.86rem;
+
+  }
+
+
+  .dots{
+
+    margin-top:10px;
+
+    padding-bottom:12px;
+
+  }
+
+}
+
+
+/* =========================================================
+   ECRANE MICI PE ÎNĂLȚIME
+   ========================================================= */
+
+@media(max-height:700px){
+
+  header{
+
+    height:82px;
+
+    padding-top:18px;
+
+  }
+
+
+  .card{
+
+    padding:
+      14px
+      20px;
+
+  }
+
+
+  .meta{
+
+    margin-bottom:6px;
+
+  }
+
+
+  .question{
+
+    margin-bottom:8px;
+
+  }
+
+
+  .controls{
+
+    margin-top:10px;
+
+  }
+
+
+  .dots{
+
+    margin-top:8px;
+
+  }
+
+}
+
+
+/* =========================================================
+   TIMER DE STUDIU — CHENAR DE PROGRES ÎN JURUL RĂSPUNSULUI
+   ========================================================= */
+
+.answer-shell{
+  position:relative;
+  flex:0 0 auto;
+  min-width:0;
+  padding:3px;
+  border-radius:12px;
+}
+
+.answer-timer-frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:visible;
+  z-index:2;
+}
+
+.answer-timer-track,
+.answer-timer-progress{
+  fill:none;
+  stroke-linecap:round;
+  vector-effect:non-scaling-stroke;
+}
+
+.answer-timer-track{
+  stroke:rgba(210,220,235,.72);
+  stroke-width:2;
+}
+
+.answer-timer-progress{
+  stroke:#e2bd45;
+  stroke-width:2.5;
+  stroke-dasharray:1;
+  stroke-dashoffset:1;
+  transition:stroke-dashoffset .2s linear;
+  filter:drop-shadow(0 0 2px rgba(226,189,69,.45));
+}
+
+body.dark-mode .answer-timer-track{
+  stroke:rgba(75,100,140,.62);
+}
+
+body.dark-mode .answer-timer-progress{
+  stroke:#e3c34f;
+}
+
+.timer-bookmark-tools{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.floating-tools{
+  position:fixed;
+  left:14px;
+  bottom:14px;
+  z-index:10500;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:4px;
+  border-radius:18px;
+  background:rgba(255,255,255,.78);
+  border:1px solid rgba(22,70,160,.10);
+  box-shadow:0 7px 22px rgba(20,45,90,.12);
+  backdrop-filter:blur(9px);
+}
+
+body.dark-mode .floating-tools{
+  background:rgba(10,27,53,.82);
+  border-color:#263f69;
+  box-shadow:0 8px 25px rgba(0,0,0,.35);
+}
+
+@media(max-width:600px){
+  .floating-tools{
+    left:10px;
+    bottom:10px;
+  }
+}
+
+.timer-btn-wrapper,
+.bookmark-btn-wrapper{
+  position:relative;
+  display:inline-flex;
+}
+
+.timer-tooltip,
+.bookmark-tooltip{
+  position:absolute;
+  bottom:calc(100% + 8px);
+  background:#000000;
+  color:#00f3ff;
+  font-family:Arial, sans-serif;
+  font-weight:700;
+  font-size:.82rem;
+  padding:4px 10px;
+  border-radius:14px;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .2s ease, visibility .2s ease;
+  box-shadow:0 0 8px rgba(0, 243, 255, 0.25), 0 4px 12px rgba(0,0,0,0.5);
+  z-index:10600;
+  letter-spacing:0.5px;
+}
+
+.timer-tooltip{
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.bookmark-tooltip{
+  left:0;
+  transform:none;
+}
+
+.timer-btn-wrapper:hover .timer-tooltip,
+.bookmark-tooltip.show{
+  opacity:1;
+  visibility:visible;
+}
+
+body.clean-mode .timer-tooltip,
+body.clean-mode .bookmark-tooltip{
+  display:none !important;
+}
+
+.bookmark-btn,
+.timer-btn,
+.clean-btn{
+  width:30px;
+  height:30px;
+  padding:0;
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1rem;
+  line-height:1;
+  border:1px solid rgba(22,70,160,.14);
+  background:rgba(255,255,255,.92);
+  color:#1646a0;
+  box-shadow:0 3px 12px rgba(20,45,90,.10);
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.bookmark-btn:hover,
+.timer-btn:hover,
+.clean-btn:hover{
+  transform:translateY(-1px) scale(1.05);
+  box-shadow:0 5px 16px rgba(20,45,90,.16);
+  background:#f5f7ff;
+}
+
+.bookmark-btn.saved{
+  color:#d2aa32;
+  background:#fffaf0;
+  border-color:rgba(210,170,50,.3);
+}
+
+body.dark-mode .bookmark-btn,
+body.dark-mode .timer-btn,
+body.dark-mode .clean-btn{
+  background:#10284f;
+  color:#e6c65b;
+  border-color:#2e4b78;
+}
+
+body.dark-mode .bookmark-btn.saved{
+  background:#2a2940;
+  color:#f0cf60;
+}
+
+/* =========================================================
+   PANOU TIMER INITIAL SI FLOTANT
+   ========================================================= */
+
+.timer-card-inline{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:0 8px 28px rgba(20,45,90,.07);
+  padding:24px;
+  width:min(450px, 100%);
+  margin:20px auto 0;
+  transition:background .4s ease, border-color .4s ease;
+}
+
+.timer-popover{
+  position:fixed;
+  z-index:12000;
+  width:min(350px,calc(100vw - 28px));
+  padding:17px;
+  border:1px solid rgba(22,70,160,.16);
+  border-radius:18px;
+  background:rgba(255,255,255,.98);
+  box-shadow:0 18px 55px rgba(20,45,90,.22);
+  backdrop-filter:blur(12px);
+  transform-origin:top right;
+  animation:timerPopoverIn .22s ease both;
+}
+
+@keyframes timerPopoverIn{
+  from{opacity:0;transform:translateY(-5px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.timer-popover.hidden{
+  display:none;
+}
+
+.timer-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  color:#173b78;
+  font:700 1.1rem Arial,sans-serif;
+  margin-bottom:14px;
+}
+
+.timer-tabs{
+  display:flex;
+  gap:6px;
+  margin-bottom:14px;
+  border-bottom:1px solid #e2e7ef;
+  padding-bottom:8px;
+}
+
+.timer-tab{
+  flex:1;
+  padding:8px 10px;
+  border-radius:8px;
+  font-size:.88rem;
+  background:#f0f4ff;
+  color:#1646a0;
+  border:1px solid transparent;
+  cursor:pointer;
+  text-align:center;
+  font-weight:600;
+}
+
+.timer-tab.active{
+  background:linear-gradient(135deg,#1646a0,#285fca);
+  color:#ffffff;
+}
+
+.timer-close{
+  width:26px;
+  height:26px;
+  padding:0;
+  border-radius:50%;
+  background:#eef3fb;
+  color:#52627a;
+  font-size:.8rem;
+}
+
+.timer-input-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+.timer-input{
+  width:100%;
+  min-width:0;
+  padding:10px 11px;
+  border:1px solid #d9e1ee;
+  border-radius:11px;
+  outline:none;
+  background:#fbfcff;
+  color:#202733;
+  font:600 .95rem Arial,sans-serif;
+}
+
+.timer-input:focus{
+  border-color:#6d91d8;
+  box-shadow:0 0 0 3px rgba(31,93,204,.10);
+}
+
+.timer-unit{
+  font:600 .84rem Arial,sans-serif;
+  color:#6b7280;
+}
+
+.timer-presets{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-bottom:14px;
+}
+
+.timer-preset{
+  padding:9px 5px;
+  border-radius:10px;
+  font-size:.82rem;
+  background:#edf3ff;
+  color:#1646a0;
+  border:1px solid #d8e3f8;
+}
+
+.timer-preset:hover{
+  background:#dfeaff;
+}
+
+.timer-start{
+  width:100%;
+  padding:12px 14px;
+  border-radius:11px;
+  font-size:1rem;
+  background:linear-gradient(135deg,#1646a0,#285fca);
+  box-shadow:0 5px 16px rgba(22,70,160,.20);
+}
+
+.timer-command-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:8px;
+}
+
+.timer-command{
+  padding:8px 7px;
+  font-size:.78rem;
+  border-radius:9px;
+  background:#edf3ff;
+  color:#1646a0;
+}
+
+.timer-command.stop{
+  background:#fff0f0;
+  color:#a33b3b;
+}
+
+body.dark-mode .timer-card-inline,
+body.dark-mode .timer-popover{
+  background:rgba(13,27,53,.98);
+  border-color:#2a4672;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+body.dark-mode .timer-title{
+  color:#f0d98a;
+}
+
+body.dark-mode .timer-tabs{
+  border-bottom-color:#22375d;
+}
+
+body.dark-mode .timer-tab{
+  background:#10284f;
+  color:#aebbd2;
+}
+
+body.dark-mode .timer-tab.active{
+  background:linear-gradient(135deg,#1d4fa8,#2865c8);
+  color:#ffffff;
+}
+
+body.dark-mode .timer-close{
+  background:#1a3157;
+  color:#b8c5da;
+}
+
+body.dark-mode .timer-input{
+  background:#0a1932;
+  border-color:#2a426a;
+  color:#eef2fa;
+}
+
+body.dark-mode .timer-unit{
+  color:#aebbd2;
+}
+
+body.dark-mode .timer-preset,
+body.dark-mode .timer-command{
+  background:#18345f;
+  color:#e4c85e;
+  border-color:#2b4b79;
+}
+
+body.dark-mode .timer-command.stop{
+  background:#402b34;
+  color:#ffb0a8;
+}
+
+/* =========================================================
+   LEGENDĂ INIȚIALĂ STRUCTURATĂ
+   ========================================================= */
+
+.initial-legend{
+  margin-top:22px;
+  padding:20px;
+  background:rgba(255,255,255,.8);
+  border:1px solid var(--border);
+  border-radius:16px;
+  font-family:Arial, sans-serif;
+  color:var(--text);
+  box-shadow:0 4px 20px rgba(20,45,90,.05);
+  backdrop-filter:blur(6px);
+}
+
+.initial-legend-title{
+  font-weight:700;
+  color:var(--royal);
+  margin-bottom:14px;
+  font-size:.85rem;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  text-align:center;
+}
+
+.initial-legend-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+  gap:10px;
+}
+
+.initial-legend-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 12px;
+  background:rgba(22,70,160,.03);
+  border:1px solid rgba(22,70,160,.08);
+  border-radius:10px;
+  font-size:.82rem;
+  line-height:1.4;
+}
+
+.initial-legend-icon{
+  font-size:1.1rem;
+  flex-shrink:0;
+}
+
+.initial-legend-key{
+  display:inline-block;
+  padding:2px 6px;
+  background:#e2e8f0;
+  border:1px solid #cbd5e1;
+  border-radius:5px;
+  font-family:monospace;
+  font-size:.78rem;
+  font-weight:700;
+  color:#1e293b;
+}
+
+.initial-legend-note{
+  margin-top:4px;
+  padding-top:4px;
+  border-top:1px dashed var(--border);
+  font-size:.76rem;
+  color:var(--muted);
+  text-align:center;
+  line-height:1.4;
+}
+
+body.dark-mode .initial-legend{
+  background:rgba(13,27,53,.7);
+  border-color:#22375d;
+}
+
+body.dark-mode .initial-legend-title{
+  color:#f0d98a;
+}
+
+body.dark-mode .initial-legend-item{
+  background:rgba(255,255,255,.03);
+  border-color:rgba(255,255,255,.08);
+  color:#cbd5e1;
+}
+
+body.dark-mode .initial-legend-key{
+  background:#1e293b;
+  border-color:#334155;
+  color:#f1f5f9;
+}
+
+body.dark-mode .initial-legend-note{
+  border-top-color:#22375d;
+  color:#94a3b8;
+}
+
+/* =========================================================
+   MODALE RUGĂCIUNE ȘI COMPLETARE
+   ========================================================= */
+
+.study-overlay{
+  position:fixed;
+  inset:0;
+  z-index:11000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  background:rgba(6,18,40,.42);
+  backdrop-filter:blur(7px);
+  animation:studyFadeIn .35s ease both;
+}
+
+.study-overlay.closing{
+  animation:studyFadeOut .32s ease forwards;
+}
+
+@keyframes studyFadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+@keyframes studyFadeOut{
+  from{opacity:1}
+  to{opacity:0}
+}
+
+.study-modal{
+  width:min(850px,94vw);
+  max-height:calc(100vh - 44px);
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:30px 34px 26px;
+  border-radius:24px;
+  border:1px solid rgba(226,189,69,.32);
+  background:linear-gradient(145deg,rgba(255,255,255,.99),rgba(247,249,253,.99));
+  box-shadow:0 28px 90px rgba(0,0,0,.28);
+  animation:studyModalIn .38s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes studyModalIn{
+  from{opacity:0;transform:translateY(18px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.study-prayer{
+  margin:0;
+  text-align:center;
+  color:#202733;
+  font-family:"Literata",Georgia,"Times New Roman",serif;
+  font-size:clamp(1rem,1.55vw,1.25rem);
+  line-height:1.65;
+}
+
+.study-button{
+  flex:0 0 auto;
+  margin-top:20px;
+  padding:11px 28px;
+  border-radius:13px;
+  font-size:.92rem;
+  letter-spacing:.06em;
+  background:linear-gradient(135deg,#1646a0,#285fca);
+  box-shadow:0 8px 22px rgba(22,70,160,.22);
+}
+
+body.dark-mode .study-overlay{
+  background:rgba(2,8,20,.62);
+}
+
+body.dark-mode .study-modal{
+  background:linear-gradient(145deg,#10264b,#0b1931);
+  border-color:rgba(227,195,79,.28);
+}
+
+body.dark-mode .study-prayer{
+  color:#eee8d8;
+}
+
+.completion-overlay{
+  position:fixed;
+  inset:0;
+  z-index:13000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:rgba(8,20,43,.72);
+  backdrop-filter:blur(5px);
+  animation:completionIn .4s ease both;
+}
+
+@keyframes completionIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+.completion-title{
+  position:relative;
+  z-index:3;
+  margin:0;
+  padding:30px;
+  text-align:center;
+  color:#f2d36b;
+  font-family:"Literata",Georgia,serif;
+  font-size:clamp(2rem,6vw,4rem);
+  line-height:1.1;
+  text-shadow:0 4px 25px rgba(0,0,0,.35);
+  animation:completionTitle .65s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes completionTitle{
+  from{opacity:0;transform:scale(.82) translateY(10px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+.prayer-rain{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.prayer-drop{
+  position:absolute;
+  top:-12vh;
+  opacity:.92;
+  user-select:none;
+  animation:prayerRain linear infinite;
+  will-change:transform;
+}
+
+@keyframes prayerRain{
+  0%{transform:translate3d(0,115vh,0) rotate(-7deg);opacity:0}
+  8%{opacity:.9}
+  100%{transform:translate3d(var(--drift),-15vh,0) rotate(7deg);opacity:.9}
+}
+
+/* =========================================================
+   MOD CLEAN (Tasta C sau Buton 🔒) — PĂSTREAZĂ DOAR ☦ ȘI CONȚINUTUL
+   ========================================================= */
+
+html.clean-mode,
+body.clean-mode,
+body.clean-mode *{
+  cursor:none !important;
+}
+
+html.clean-mode{
+  scrollbar-width:none !important; /* Ascunde bara în Firefox */
+}
+
+html.clean-mode::-webkit-scrollbar{
+  display:none !important; /* Ascunde bara în Chrome, Safari, Edge */
+  width:0 !important;
+  height:0 !important;
+}
+
+body.clean-mode header h1{
+  font-size:0;
+  color:transparent;
+}
+
+body.clean-mode header h1::before{
+  content:"☦";
+  display:block;
+  color:#173b78;
+  font-size:2.4rem;
+  line-height:1;
+}
+
+body.dark-mode.clean-mode header h1::before{
+  color:#f1d77b;
+}
+
+body.clean-mode .theme-toggle,
+body.clean-mode .floating-tools,
+body.clean-mode .progress-wrap,
+body.clean-mode .meta,
+body.clean-mode .section,
+body.clean-mode .controls,
+body.clean-mode .dots{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .35s ease, visibility .35s ease;
+}
+
+body.clean-mode header{
+  height:70px;
+}
+
+body.clean-mode .card{
+  margin-top:0;
+}
+
+body.clean-mode header h1{
+  transition:color .35s ease, font-size .35s ease;
+}
+
+@media(max-width:600px){
+  body.clean-mode header{
+    height:58px;
+  }
+
+  body.clean-mode header h1::before{
+    font-size:1.45rem;
+  }
+}
+
+@media(max-width:600px){
+  .answer-shell{padding:2px}
+  .bookmark-btn,.timer-btn,.clean-btn{width:28px;height:28px;font-size:.92rem}
+  .study-modal{padding:23px 18px 20px;border-radius:19px}
+  .study-prayer{font-size:.98rem;line-height:1.52}
+  .study-button{margin-top:14px;padding:10px 23px}
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     CORTINA DE TRANZIȚIE
+     ===================================================== -->
+
+<div
+  class="theme-curtain"
+  id="themeCurtain">
+</div>
+
+
+<!-- =====================================================
+     BARA DE PROGRES
+     ===================================================== -->
+
+<div class="progress-wrap">
+
+  <div
+    class="progress-bar"
+    id="progress">
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+
+<header>
+
+  <h1>
+    ☦ Catehism Ortodox
+  </h1>
+
+  <!-- BUTON ZI / NOAPTE -->
+
+  <button
+    class="theme-toggle"
+    id="themeToggle"
+    aria-label="Schimbă modul zi/noapte"
+    title="Schimbă modul zi/noapte (Tasta N)">
+
+    🌙
+
+  </button>
+
+</header>
+
+
+<!-- =====================================================
+     APLICAȚIE
+     ===================================================== -->
+
+<div class="floating-tools" id="floatingTools" style="display:none;" aria-label="Instrumente studiu">
+  <div class="bookmark-btn-wrapper">
+    <button
+      class="bookmark-btn"
+      id="bookmarkButton"
+      aria-label="Salvează pagina"
+      title="Salvează pagina">🔖</button>
+    <div class="bookmark-tooltip" id="bookmarkTooltip">Ai pus semnul de carte!</div>
+  </div>
+
+  <div class="timer-btn-wrapper">
+    <button
+      class="timer-btn"
+      id="timerButton"
+      aria-label="Timer de studiu">⏱️</button>
+    <div class="timer-tooltip" id="timerTooltip">00:00</div>
+  </div>
+
+  <button
+    class="clean-btn"
+    id="cleanButton"
+    aria-label="Mod Clean (ascunde elementele)"
+    title="Mod Clean (Tasta C)">🔒</button>
+</div>
+
+<main class="app">
+
+  <!-- ===================================================
+        SECTIUNEA INITIALA A TIMERULUI (ACCESATĂ LA ÎNCEPUT)
+        =================================================== -->
+
+  <div id="setupSection">
+    <div class="timer-card-inline">
+      <div class="timer-title">
+        <span>⏱️ Configurare studiu</span>
+      </div>
+
+      <div class="timer-tabs">
+        <button class="timer-tab active" id="tabPagesInit">📖 Pagini</button>
+        <button class="timer-tab" id="tabTimeInit">⏱️ Timp</button>
+      </div>
+
+      <!-- Content Pagini -->
+      <div id="pagesModeContentInit">
+        <div class="timer-input-row">
+          <span class="timer-unit" style="min-width:40px;">De la:</span>
+          <input class="timer-input" id="pageStartInputInit" type="number" min="1" step="1" value="1" aria-label="Pagina de start">
+          <span class="timer-unit" style="min-width:40px;">Până la:</span>
+          <input class="timer-input" id="pageEndInputInit" type="number" min="1" step="1" value="10" aria-label="Pagina de sfârșit">
+        </div>
+      </div>
+
+      <!-- Content Timp -->
+      <div id="timeModeContentInit" style="display:none;">
+        <div class="timer-input-row">
+          <input class="timer-input" id="timerInputInit" type="number" min="1" max="720" step="1" value="10" aria-label="Timp în minute">
+          <span class="timer-unit">minute</span>
+        </div>
+
+        <div class="timer-presets">
+          <button class="timer-preset preset-init" data-minutes="10">10 min</button>
+          <button class="timer-preset preset-init" data-minutes="15">15 min</button>
+          <button class="timer-preset preset-init" data-minutes="30">30 min</button>
+        </div>
+      </div>
+
+      <button class="timer-start" id="timerStartInit">▶ Începe studiul</button>
+    </div>
+
+    <!-- LEGENDA STRUCTURATĂ -->
+    <div class="initial-legend">
+      <div class="initial-legend-title">Ghid rapid și comenzi din tastatură</div>
+      
+      <div class="initial-legend-grid">
+        <div class="initial-legend-item">
+          <span class="initial-legend-icon">🔖</span>
+          <span><strong>Semn de carte:</strong> Salvează pagina curentă</span>
+        </div>
+
+        <div class="initial-legend-item">
+          <span class="initial-legend-icon">⏱️</span>
+          <span><strong>Timer studiu:</strong> Deschide panoul (<span class="initial-legend-key">T</span>)</span>
+        </div>
+
+        <div class="initial-legend-item">
+          <span class="initial-legend-icon">🔒</span>
+          <span><strong>Mod Clean:</strong> Ascunde interfața (<span class="initial-legend-key">C</span>)</span>
+        </div>
+
+        <div class="initial-legend-item">
+          <span class="initial-legend-icon">🌙</span>
+          <span><strong>Mod Noapte:</strong> Schimbă tema (<span class="initial-legend-key">N</span>)</span>
+        </div>
+
+        <div class="initial-legend-item">
+          <span class="initial-legend-icon">🖥️</span>
+          <span><strong>Ecran complet:</strong> Comută Full Screen (<span class="initial-legend-key">F</span> / <span class="initial-legend-key">F11</span>)</span>
+        </div>
+
+        <div class="initial-legend-item">
+          <span class="initial-legend-icon">↔️</span>
+          <span><strong>Navigare:</strong> Schimbă întrebările (<span class="initial-legend-key">←</span> <span class="initial-legend-key">→</span>)</span>
+        </div>
+      </div>
+
+      <div class="initial-legend-note">
+        💡 <em>Notă: Derularea paginii prin scroll (roata mausului sau gesture) funcționează complet și în Modul Clean, chiar dacă cursorul nu este vizibil.</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================
+        CARD ÎNTREBĂRI ȘI RĂSPUNSURI (ASCUNS INIȚIAL)
+        =================================================== -->
+
+  <div id="studyContent" style="display:none;">
+    <section class="card">
+
+      <div class="meta">
+
+        <div
+          class="number"
+          id="num">
+        </div>
+
+        <div
+          class="counter"
+          id="counter">
+        </div>
+
+      </div>
+
+      <div
+        class="section"
+        id="section">
+      </div>
+
+      <h2
+        class="question"
+        id="question">
+      </h2>
+
+      <div class="answer-shell" id="answerShell">
+        <svg class="answer-timer-frame" id="answerTimerFrame" aria-hidden="true" preserveAspectRatio="none">
+          <rect class="answer-timer-track" x="1.5" y="1.5" width="0" height="0" rx="10" pathLength="1"></rect>
+          <rect class="answer-timer-progress" id="answerTimerProgress" x="1.5" y="1.5" width="0" height="0" rx="10" pathLength="1"></rect>
+        </svg>
+        <div class="answer" id="answer"></div>
+      </div>
+
+    </section>
+
+    <!-- CONTROALE -->
+
+    <div class="controls">
+
+      <button id="prev">
+        ← Înapoi
+      </button>
+
+      <button id="next">
+        Următoarea →
+      </button>
+
+    </div>
+
+    <!-- PUNCTE -->
+
+    <div
+      class="dots"
+      id="dots">
+    </div>
+  </div>
+
+</main>
+
+
+<!-- =========================================================
+     TIMER POP-UP (FLOTANT PENTRU MODIFICĂRI ÎN TIMPUL STUDIULUI)
+     ========================================================= -->
+<div class="timer-popover hidden" id="timerPopover" role="dialog" aria-label="Timer de studiu">
+  <div class="timer-title">
+    <span>⏱️ Timer de studiu</span>
+    <button class="timer-close" id="timerClose" aria-label="Închide">✕</button>
+  </div>
+
+  <div class="timer-tabs">
+    <button class="timer-tab active" id="tabTime">⏱️ Timp</button>
+    <button class="timer-tab" id="tabPages">📖 Pagini</button>
+  </div>
+
+  <!-- Content Timp -->
+  <div id="timeModeContent">
+    <div class="timer-input-row">
+      <input class="timer-input" id="timerInput" type="number" min="1" max="720" step="1" value="10" aria-label="Timp în minute">
+      <span class="timer-unit">minute</span>
+    </div>
+
+    <div class="timer-presets">
+      <button class="timer-preset" data-minutes="10">10 min</button>
+      <button class="timer-preset" data-minutes="15">15 min</button>
+      <button class="timer-preset" data-minutes="30">30 min</button>
+    </div>
+  </div>
+
+  <!-- Content Pagini -->
+  <div id="pagesModeContent" style="display:none;">
+    <div class="timer-input-row">
+      <span class="timer-unit" style="min-width:40px;">De la:</span>
+      <input class="timer-input" id="pageStartInput" type="number" min="1" step="1" value="1" aria-label="Pagina de start">
+      <span class="timer-unit" style="min-width:40px;">Până la:</span>
+      <input class="timer-input" id="pageEndInput" type="number" min="1" step="1" value="10" aria-label="Pagina de sfârșit">
+    </div>
+  </div>
+
+  <button class="timer-start" id="timerStart">▶ Modifică studiul</button>
+
+  <div class="timer-command-row" id="timerCommands" style="display:none">
+    <button class="timer-command" id="timerPause">Ⅱ Pauză</button>
+    <button class="timer-command stop" id="timerStop">■ Oprește</button>
+  </div>
+</div>
+
+<!-- =========================================================
+     RUGĂCIUNEA DE ÎNCEPUT
+     ========================================================= -->
+<div class="study-overlay" id="studyOverlay" style="display:none">
+  <div class="study-modal">
+    <p class="study-prayer">
+      Doamne, Iisuse Hristoase, Dumnezeul nostru, Cel ce Te-ai sălăşluit în inimile cele curate ale celor doisprezece Apostoli prin harul Preasfântului Duh, Care S-a coborât în chipul limbilor de foc şi a deschis gurile lor de au început a grăi în alte limbi, trimite, Doamne, acelaşi Duh Sfânt peste mine, robul Tău, luminează mintea mea şi sădeşte în urechile mele Sfânta Scriptură cea insuflată de Tine, precum şi toată învăţătura cea bună şi folositoare. Pune în mintea şi inima mea duhul înţelepciunii, al ştiinţei, al evlaviei şi al fricii Tale, duhul cel bun care povăţuieşte pe calea cea dreaptă spre înţelegerea şi lucrarea a toată fapta cea bună, spre slava sfântului Tău nume, pentru rugăciunile Preacuratei Maicii Tale, ale înţe­le­pţilor Tăi Apostoli şi ale tuturor sfinţilor. Că Tu eşti luminarea sufletelor şi a trupurilor noastre şi Ţie slavă şi mulţumire înălţăm, împreună şi Celui fără de început al Tău Părinte şi Preasfântului şi bunului şi de viaţă făcătorului Tău Duh, acum şi pururea şi în vecii vecilor. Amin.
+    </p>
+    <button class="study-button" id="studyButton">STUDIAZĂ!</button>
+  </div>
+</div>
+
+<!-- =========================================================
+     FINAL TIMER
+     ========================================================= -->
+<div class="completion-overlay" id="completionOverlay" style="display:none">
+  <div class="prayer-rain" id="prayerRain"></div>
+  <h2 class="completion-title">Slavă Domnului!</h2>
+</div>
+
+<script>
+
+
+/* =========================================================
+   ÎNTREBĂRI ȘI RĂSPUNSURI
+   ========================================================= */
+
+const items = [
+
+{
+section:
+"CEA DÂINTÂI DATORIE A CREDINCIOSULUI",
+
+q:
+"Care este cea dintâi datorie și cea mai mare grijă a credinciosului în viață?",
+
+a:
+"Cea dintâi datorie și cea mai mare grijă a credinciosului în viață este grija de mântuirea sufletului său. Nimic pe lume nu e mai de preț pentru el ca mântuirea sufletului, după cuvântul Mântuitorului, Care zice: „Ce-i folosește omului să câștige lumea întreagă, dacă-și pierde sufletul? Sau ce ar putea să dea omul, în schimb, pentru sufletul său?” (Marcu 8, 36-37)."
+},
+
+{
+section:"",
+q:
+"Dar ce este mântuirea?",
+
+a:
+"Mântuirea este eliberarea din robia păcatului și a morții și dobândirea vieții de veci în Hristos. Ea ne-a fost făcută cu putință de întruparea, jertfa, învierea și înălțarea Domnului nostru Iisus Hristos la cer și ne-o însușim prin harul dumnezeiesc, cu care trebuie să conlucrăm prin credință și fapte. De mântuire se poate împărtăși orice om, căci Dumnezeu „voiește ca toți oamenii să se mântuiască și la cunoștința adevărului să vină” (1 Timotei 2, 4)."
+},
+
+{
+section:"",
+q:
+"Unde se găsește adevărul care duce la mântuire?",
+
+a:
+"Adevărul care duce la mântuire se găsește în Sfânta Biserică Ortodoxă, „stâlp și temelie a adevărului” (1 Timotei 3, 15)."
+},
+
+{
+section:"",
+q:
+"De la cine are Biserica Ortodoxă acest adevăr?",
+
+a:
+"Biserica Ortodoxă are acest adevăr de la Dumnezeu Însuși, vestit mai dinainte prin Patriarhii, Drepții și Prorocii Vechiului Testament, care au avut o viață și cugetare sfântă, și apoi în mod desăvârșit prin Însuși Fiul Său întrupat, Domnul nostru Iisus Hristos, Mântuitorul, cum spune Sfântul Apostol Pavel: „După ce Dumnezeu odinioară, în multe rânduri și în multe chipuri, a vorbit părinților noștri prin proroci, în zilele acestea mai de pe urmă ne-a grăit nouă prin Fiul, pe Care L-a pus moștenitor a toate și prin Care a făcut și veacurile; Care, fiind strălucirea slavei și chipul ființei Lui și Care ține toate cu cuvântul puterii Sale” (Evrei 1, 1-3)."
+},
+
+{
+section:"",
+q:
+"Cum a dat Dumnezeu acest adevăr?",
+
+a:
+"Acest adevăr l-a dat Dumnezeu prin Descoperirea dumnezeiască."
+},
+
+{
+section:"",
+q:
+"Ce este Descoperirea dumnezeiască?",
+
+a:
+"Descoperirea sau Revelația dumnezeiască este comoara de adevăruri pe care Dumnezeu a dat-o oamenilor, pentru ca aceștia, cunoscându-L pe El, voia Lui și lucrarea Lui, să-L cinstească după vrednicie, să-I împlinească voia și prin aceasta să se mântuiască."
+},
+
+{
+section:"",
+q:
+"Ce dovedește din partea lui Dumnezeu această Descoperire?",
+
+a:
+"Descoperirea dumnezeiască dovedește marea iubire a lui Dumnezeu față de oameni. „Dumnezeu este iubire” (1 Ioan 4, 8), iubire nesfârșită, un ocean de iubire, cum zic Sfinții Părinți. Prin ea Dumnezeu revarsă lumina și căldura Lui, cea mai presus de fire, asupra întregii făpturi și o ajută să se împărtășească cât mai deplin de puterea cea de sus și adevărul cel mântuitor. Descoperirea lui Dumnezeu e însăși această lumină ce ni s-a dat din nesfârșita Lui iubire față de noi."
+},
+
+{
+section:"",
+q:
+"Dumnezeu a dat Descoperirea Sa pentru toți oamenii?",
+
+a:
+"Descoperirea dumnezeiască a fost dată pentru toți oamenii, pentru că toți au nevoie de mântuire, dar, întrucât nu toți erau vrednici de a primi Descoperirea direct de la Dumnezeu, ea a fost încredințată anumitor oameni aleși, care la rândul lor să o vestească celor ce doresc să o primească."
+},
+
+{
+section:"",
+q:
+"De ce nu toți oamenii pot primi Descoperirea direct de la Dumnezeu?",
+
+a:
+"Pentru nevrednicia pricinuită de necurăția sufletului și a trupului lor, în urma căderii în păcat a protopărinților noștri."
+},
+
+{
+section:"",
+q:
+"Care au fost vestitorii Descoperirii dumnezeiești?",
+
+a:
+"Oamenii aleși de Dumnezeu în acest scop au fost Patriarhii, Moise și Prorocii, care au primit și au vestit cuvântul lui Dumnezeu în sânul poporului evreu. Această Descoperire a fost adusă oamenilor în chip deplin de Însuși Fiul lui Dumnezeu întrupat, Domnul nostru Iisus Hristos, „Lumina cea adevărată, care luminează pe tot omul care vine în lume” (Ioan 1, 9). Mântuitorul a răspândit în lume Descoperirea dumnezeiască prin Sfinții Apostoli și ucenici, în Biserica întemeiată de El și intrată în istorie la Cincizecime."
+},
+
+{
+section:"",
+q:
+"Este cu putință ca Dumnezeu să Se descopere oamenilor?",
+
+a:
+`Este cu putință. S-a susținut, totuși, de către unii înțelepți păgâni și de către unii eretici, că Dumnezeu nu Se putea descoperi oamenilor. Întâi, pentru că Dumnezeu cel nesfârșit, Cel nematerial, Cel neschimbător și Cel veșnic nu S-ar fi putut apropia și nu ar fi avut deci cum să fie cunoscut de către ceea ce este mărginit, trupesc, schimbător și trecător. În al doilea rând, dacă Dumnezeu S-ar fi apropiat de ființele muritoare, aceste ființe slabe și neajutorate nu ar fi reușit să cuprindă și să înțeleagă Descoperirea care li se făcea. Acei păgâni și eretici judecau așa, pentru că ei socoteau pe Dumnezeu ca o putere nepersonală, lipsită de viață și mai ales de iubire.
+
+Pentru noi, creștinii, nu sunt asemenea opreliști, fiindcă, după învățătura Bisericii, Dumnezeu este o ființă personală, Care poate avea legături cu alte persoane, și, deci, și cu oameni. Sfânta Scriptură însăși ne învață că Dumnezeu a ținut mereu legătura cu oamenii, din cele mai îndepărtate timpuri, dându-le Descoperirea Sa: „După ce Dumnezeu odinioară, în multe rânduri și în multe chipuri, a vorbit părinților noștri prin proroci, în zilele acestea mai de pe urmă ne-a grăit nouă prin Fiul” (Evrei 1, 1). Ca izvor al vieții și al iubirii, Dumnezeu Se apleacă și Se descoperă continuu oamenilor. El nu e niciodată prea sus sau prea departe, pentru că El sălășluiește și în inimile noastre.
+
+Descoperirea dumnezeiască privește pe oameni și ei pot s-o primească. Ei sunt „chipul și asemănarea lui Dumnezeu” și, prin aceasta, îndreptățiți la cinstea descoperirilor de sus. Această cinste a mers până acolo încât Descoperirea deplină adusă de Fiul lui Dumnezeu pe pământ s-a făcut prin întruparea Sa ca om.
+
+Credinciosul poate primi Descoperirea dumnezeiască și pentru că el însuși e mistuit de dorul fierbinte după Dumnezeu. Psalmistul lămurește aceasta zicând: „În ce chip dorește cerbul izvoarele apelor, așa Te dorește sufletul meu pe Tine, Dumnezeule. Însetat-a sufletul meu de Dumnezeul cel viu; când voi veni și mă voi arăta feței lui Dumnezeu?” (Psalmii 41, 1-2). Un scriitor bisericesc arată astfel suspinul inimii sale după Dumnezeu: „Că ne-ai făcut spre a Te căuta și neliniștit este sufletul nostru până nu se va odihni întru Tine”.
+
+Ca ființă înzestrată cu minte, întrucât este creat după „chipul lui Dumnezeu”, omul poate primi adevărul din partea lui Dumnezeu.
+
+Acesta, în nesfârșita Sa înțelepciune, ușurează căile de înțelegere a adevărurilor date în cei care s-au făcut vrednici printr-o viață aleasă și au primit harul Duhului Sfânt.`
+},
+
+{
+section:"",
+q:
+"De ce are o autoritate mai mare Descoperirea dumnezeiască decât mintea omenească în lucrarea mântuirii?",
+
+a:
+`Pentru că Descoperirea dumnezeiască nu greșește și nu înșală niciodată, fiind garantată de Dumnezeu Însuși, Care e Adevărul (Ioan 14, 6), de nesfârșita Lui înțelepciune și de împlinirea până astăzi a atâtor dintre cele vestite de această Descoperire. Mintea omenească poate înțelege unele dintre cele cuprinse în Descoperirea dumnezeiască, dar ea nu poate pătrunde toată această Descoperire.
+
+Pentru ca mintea noastră să fie întru totul de aceeași părere cu Descoperirea de sus, ar trebui să cunoaștem pe Dumnezeu în ființa Sa. Dar cum ființa lui Dumnezeu nu poate fi cunoscută, pentru că mijloacele firești pe care mintea noastră ni le pune la îndemână nu ajută la acest lucru, noi ne punem toată încrederea în adevărurile Descoperirii, care ne fac cunoscut pe Dumnezeu prin predicare sau vestirea cuvântului despre El.
+
+Descoperirea dumnezeiască e vrednică de a fi primită de mintea noastră. Dacă mintea își pune încrederea în făgăduința unui om serios și vrednic de laudă, despre care știm sigur că nu ne înșală, de ce să nu dăm aceeași crezare cuvintelor lui Dumnezeu Însuși? „Nu e mai cuminte, zice Origen, să dăm mai multă crezare lui Dumnezeu?”
+
+De asemenea, Sfântul Ioan Gură de Aur ne îndeamnă să ne încredem totdeauna lui Dumnezeu, chiar atunci când cuvântul Lui pare a fi împotriva felului nostru de a judeca și de a vedea. Judecata și vederea noastră se pot înșela; cuvântul Lui, niciodată.`
+},
+
+{
+section:"",
+q:
+"Câte feluri de Descoperiri sunt?",
+
+a:
+"Privită după Izvorul ei, Care e Dumnezeu, Descoperirea dumnezeiască e una singură. Dacă, însă, ținem seama de căile folosite pentru a ajunge până la noi, Descoperirea este de două feluri: întâi, Descoperirea dată pe calea firii; și al doilea, Descoperirea dată pe calea mai presus de fire, adică pe cale supranaturală. Aceasta din urmă nu poate fi primită fără ajutorul lui Dumnezeu, dat celui credincios."
+},
+
+{
+section:"",
+q:
+"Ce se înțelege prin Descoperirea pe cale firii?",
+
+a:
+`Prin Descoperirea pe calea firii, numită și Revelația naturală, se înțelege comoara de învățături pe care natura și firea omenească ni le dezvăluie despre existența și unele însușiri ale lui Dumnezeu.
+
+Natura în mijlocul căreia trăim ne spune că zidirea trebuie să aibă un Ziditor, pentru că nu poate fi ceva pricinuit fără un pricinuitor.
+
+Ordinea și frumusețea desăvârșită a alcătuirii lumii oglindesc lucrarea unui Făcător atotputernic, preînțelept și preaiubitor. Întreaga fire ne grăiește despre Dumnezeu, după cuvântul Psalmistului:
+
+„Cerurile spun slava lui Dumnezeu și facerea mâinilor Lui o vestește tăria. Ziua zilei spune cuvânt, și noaptea nopții vestește știința. Nu sunt graiuri, nici cuvinte ale căror glasuri să nu se audă. În tot pământul a ieșit vestirea lor și la marginile lumii cuvintele lor” (Psalmii 18, 1-4). Întreaga făptură, prin ordinea și armonia ei, arată ca din carte și strigă pe Stăpânul și Făcătorul ei – spune Sfântul Atanasie.
+
+Chiar dacă unele popoare se închină la pietre și la lemne, ele știu că este Cineva mai mare decât ele. „Întreabă lumea, podoaba cerului, și vezi dacă nu-ți răspund după înțelegerea lor: «Dumnezeu ne-a făcut». Lucrurile acestea le-au cercetat și nobilii filosofi și din artă au cunoscut pe artist”. Sfântul Apostol Pavel întărește și adâncește cuvântul Psalmistului: „Cele nevăzute ale Lui (Dumnezeu) se văd de la facerea lumii, înțelegându-se din făptuiri, adică veșnica Lui putere și dumnezeire, așa ca ei să fie fără cuvânt de apărare” (Romani 1, 20).`
+},
+
+{
+section:"",
+q:
+"Ce se înțelege prin Descoperirea pe calea mai presus de fire sau supranaturală?",
+
+a:
+"Se înțelege Descoperirea rânduită și dată de Dumnezeu prin anumiți oameni aleși (în Vechiul Testament) și mai apoi prin Însuși Fiul Său întrupat (în Noul Testament). Prin Descoperirea pe calea firii ne ridicăm numai la adevărul că există Dumnezeu și la câteva dintre însușirile Lui. Dacă ne-am mărgini la această Descoperire, nu ne-am deosebi de păgânii înaintați ai vremurilor vechi, și mai ales ne-am lipsi de bucuriile și fericirea pe care ni le-a adus Descoperirea pe cale supranaturală. Aceasta din urmă ne face creștini, pe când cealaltă, mărginită numai la cugetare, ne ține doar la porțile Creștinismului. Descoperirea sau Revelația supranaturală nu poate fi primită și înțeleasă decât de omul credincios, adică prin credință."
+},
+
+{
+section:"",
+q:
+"Prin ce s-a dat oamenilor Descoperirea supranaturală?",
+
+a:
+`Ea a fost dată uneori prin simțuri; de pildă la arătarea lui Dumnezeu către Avraam, sub chipul a trei bărbați, la stejarul lui Mamvri (Facerea 18, 1-2), sau arătarea Mântuitorului după Înviere către ucenicii Săi (Ioan 20, 19-31). Avem aici o Descoperire din afară. Dar, de cele mai multe ori, Descoperirea pe calea supranaturală e dată sufletului omenesc printr-o luminare deosebită, pe care acesta n-ar fi putut-o câștiga numai prin puterea cugetării sale. Această luminare a sufletului și înzestrare a lui cu puterea de a primi anumite adevăruri ale Descoperirii dumnezeiești este insuflarea sau inspirația dumnezeiască. Avem aici o Descoperire care se face numai sufletului și prin suflet și pe care o putem numi duhovnicească sau dinlăuntru.
+
+Sfânta Scriptură spune chiar și în Vechiul Testament, în multe locuri (Ieșirea 4, 12; 2 Regi 23, 2; Isaia 6, 1-8; 8, 1; Avacum 2, 2 etc.), că Dumnezeu este Acela care a grăit prin Moise și proroci. Sfântul Apostol Pavel rezumă astfel istoria și felurimea acestei Descoperiri:
+
+„După ce Dumnezeu odinioară, în multe rânduri și în multe chipuri, a grăit părinților noștri prin proroci, în zilele acestea mai de pe urmă ne-a grăit nouă prin Fiul” (Evrei 1, 1-2). Descoperirea prin semne minunate, controlate de simțuri, și prin insuflarea Duhului Sfânt are autoritate hotărâtoare pentru viața religioasă și pentru mântuire. Numai prin această Descoperire omul are cunoașterea celor duhovnicești și poate deveni duhovnicesc.`
+},
+
+{
+section:"",
+q:
+"Când s-a dat oamenilor Descoperirea supranaturală?",
+
+a:
+`Această Descoperire s-a dat de la facerea primilor oameni, în Rai, până la venirea Mântuitorului, care a încunanat și a desăvârșit Descoperirea. Această lungă durată – 50508 ani – se poate împărți în trei părți.
+
+Cea dintâi se întinde de la facerea primilor oameni până la darea Legii Vechiului Testament. Această primă parte se împarte la rândul ei în două: 1) de la facerea primilor oameni până la căderea în păcat; 2) după căderea în păcat. Descoperirea se înfățișează potrivit stării omului din aceste două răstimpuri. În Rai, omul s-a bucurat de o Descoperire directă din partea lui Dumnezeu, Care-i vorbea personal. Dumnezeu îl povățuia și-l conducea direct, îl învăța despre Sine, despre legătura Sa cu omul și rostul acestuia în lume și petrecea împreună cu acest om.
+
+Partea a doua a Descoperirii începe odată cu darea Legii Vechiului Testament; ea cuprinde toate veacurile – aproape 14 – călăuzite de Legea lui Moise și de proroci și se încheie odată cu venirea Mântuitorului. Această parte a Descoperirii nu e deplină, ci pregătitoare pentru Descoperirea cea deplină. Sfântul Apostol Pavel o numește „călăuză spre Hristos” (Galateni 3, 24).
+
+Partea a treia a Descoperirii este aceea a plinătății harului și adevărului (Ioan 1, 16-17). Ea începe odată cu venirea Mântuitorului și se încheie cu ultima scriere a Noului Testament. Ne găsim pe treapta cea mai înaltă a Descoperirii dumnezeiești făcute în Însuși Fiul lui Dumnezeu (Matei 11, 27; Ioan 17, 5-6).
+
+Sfântul Apostol Pavel spune aceasta în chip hotărât: „Făcându-ne cunoscută taina voii Sale, după buna Lui socotință, astfel cum hotărâse în Sine mai înainte, spre iconomia plinirii vremilor, ca toate să fie iarăși unite în Hristos, cele din ceruri și cele de pe pământ – toate întru El” (Efeseni 1, 9-10).`
+},
+
+{
+section:"",
+q:
+"De unde știm că Iisus Hristos este desăvârșirea și plinirea Descoperirii?",
+
+a:
+`Din Sfânta Scriptură, din împlinirea întocmai a prorociilor Vechiului Testament și din istoria Bisericii Creștine.
+
+Într-adevăr, Sfântul Apostol Pavel precizează: „Iar când a venit plinirea vremii, Dumnezeu a trimis pe Fiul Său, născut din femeie, născut sub Lege, ca pe cei de sub Lege să-i răscumpere, ca să dobândim înfierea” (Galateni 4, 4-5). Sfintele Evanghelii și întreg Noul Testament întăresc întru totul adevărul că Iisus Hristos e Fiul lui Dumnezeu întrupat și plinitorul Descoperirii dumnezeiești.
+
+Prorociile Vechiului Testament privitoare la Mesia, la Răscumpărătorul, la Fiul lui Dumnezeu, s-au împlinit întocmai în Persoana lui Iisus Hristos. Sfinții Evangheliști și Sfântul Apostol Pavel citează, adesea în amănunt, prorociile care s-au împlinit în Persoana Mântuitorului. Prorocul Isaia – supranumit și Evanghelistul Vechiului Testament – vorbește pe larg de nașterea și mai ales de patimile, moartea și proslăvirea lui Mesia (Isaia cap. 7, 9, 53). Toată această prorocie s-a împlinit întocmai în faptele și viața lui Iisus Hristos, așa cum sunt înfățișate de Noul Testament (Matei 1, 21; 26, 62-64; Luca 1, 31 s.u.; Faptele Apostolilor 8, 32; 1 Corinteni 15, 3; 1 Petru 2, 24; 1 Ioan 3, 5 etc.).
+
+Documentele creștine, păgâne și iudaice din veacurile I și II susțin, fără deosebire, că Iisus Hristos ca Dumnezeu-Om este o persoană istorică sub împărații Augustus și Tiberiu și a suferit moartea sub Ponțiu Pilat. Aceleași documente, afară de cele iudaice, constată că nicio altă persoană purtând același nume, sau alt nume, nu a avut rolul și faptele lui Iisus Hristos. Marile înfăptuiri ale Bisericii adeveresc și ele dumnezeirea Întemeietorului ei.`
+},
+
+{
+section:"",
+q:
+"Se poate vorbi despre trepte ale Descoperirii dumnezeiești?",
+
+a:
+`Se poate vorbi cu toată siguranța. Am văzut mai înainte că Descoperirea dumnezeiască poate fi împărțită în trei mari perioade de timp. Fiecăreia dintre aceste perioade îi corespunde mai mult sau mai puțin o treaptă de înaintare, cu toate că aceste trepte nu sunt nici totdeauna egale și nici nu vin unele după altele într-o ordine neschimbată. Timpul de la căderea în păcat până la darea Legii pe muntele Sinai cuprinde nu numai strădanii ale firii omenești spre cunoașterea adevărului, și deci a lui Dumnezeu, ci și ajutoare directe de sus, prin Descoperirea mai presus de fire, făcută Patriarhilor. La fel, după darea Legii. După venirea Mântuitorului, Care a desăvârșit Descoperirea, cele două trepte ale Descoperirii de dinainte n-au fost înlăturate. Deci, în linii mari, Biserica admite trepte în lucrarea Descoperirii supranaturale.
+
+Cum este și firesc, Biserica pune accentul pe cele două trepte în Descoperirea dumnezeiască, înfățișate prin cele două Testamente.
+
+Sfântul Grigorie Teologul, vorbind despre schimbările produse de către acestea în viața omenirii de-a lungul timpului, le numește cutremure de pământ și le schițează astfel: „Cele două Testamente sunt două cutremure dintre care unul face trecerea de la idolatrie la legea lui Moise; celălalt, de la legea lui Moise, la Evanghelie. Dar e și un al treilea cutremur, care este mutarea din această viață în cealaltă”.
+
+Deci Biserica admite mersul treptat al Descoperirii dumnezeiești.
+
+Superioritatea Noului Testament față de Vechiul Testament e confirmată de nenumărate ori de Mântuitorul, de Sfinții Apostoli și de Sfinții Părinți. Ei arată că este o desăvârșire a Noului Testament față de cel Vechi. Acesta din urmă își păstrează valoarea lui, e adevărat, căci Mântuitorul zice: „Să nu socotiți că am venit să stric Legea sau prorocii; n-am venit să stric, ci să împlinesc. Că adevărat zic vouă: Înainte de a trece cerul și pământul, o iotă sau o cirta din Lege nu va trece, până ce se vor face toate” (Matei 5, 17-18). Dar aceste lucruri din Vechiul Testament trebuie „plinite” în lumina gradului nou de Descoperire (Noul Testament): „Ați auzid că s-a zis celor de demult […], Eu însă vă spun vouă” (Matei 5, 21 s.u). Noul Testament e dezvoltarea și plinirea celui Vechi; dar e mai mult decât atât: el e „răsăritul cel de sus”, care face să treacă „umbra Legii”. Sporul în descoperirea Persoanelor Sfintei Treimi e arătat de Sfântul Grigorie Teologul, prin cuvinte ca: „adaosuri parțiale”, „înălțări”, „înaintări” și „treceri din slavă în slavă”. Duhul Sfânt Însuși și-a rânduit lucrarea în chip treptat, măsurând-o după puterea de primire a sfinților ucenici. Astfel, la început a lucrat prin minunile săvârșite de Domnul, după patimi și înviere a fost insuflat ucenicilor, iar după înălțare, la Cincizecime, S-a arătat în chip de limbi de foc.`
+},
+
+{
+section:"",
+q:
+"De ce învățătura creștină e socotită drept cea mai înaltă treaptă a credinței?",
+
+a:
+`Pentru că învățătura creștină a fost dată de Însuși Fiul lui Dumnezeu întrupat, Domnul nostru Iisus Hristos, și pentru că nimeni altul n-a cunoscut ca El în mod direct pe Dumnezeu și n-a învățat pe oameni chiar de la Izvorul care e Însuși Dumnezeu: „Pe Dumnezeu nimeni nu L-a văzut vreodată; Fiul Cel Unul-Născut, Care este în sânul Tatălui, Acela L-a făcut cunoscut” (Ioan 1, 18).
+
+Mântuitorul Însuși declară: „Cel ce M-a văzut pe Mine a văzut pe Tatăl” (Ioan 14, 9), căci „nimeni nu cunoaște pe Fiul, decât numai Tatăl, nici pe Tatăl nu-L cunoaște nimeni, decât numai Fiul și cel căruia va voi Fiul să-i descopere” (Matei 11, 27). Iisus Hristos a adus Descoperirea celor mai mari taine ale adevărului dumnezeiesc, pe care omenirea s-a învrednicit să le cunoască de la începutul lumii.
+
+Credința adusă de El a astâmpărat și astâmpără setea după adevăr a nenumărate suflete. Ea a schimbat fața lumii vechi. Prin luminarea și schimbarea adâncă a sufletelor, ea a legat din nou viața omenească, veștejită de păcat, de Izvorul nesecat al vieții netrecătoare: Dumnezeu. Ea a coborât cerul pe pământ, împlinind rugăciunea Psalmistului: „Doamne, pleacă cerurile și Te pogoară, atinge-Te de munți și fă-i să fumege” (Psalmii 143, 5). În sfârșit, nicio altă credință sau cunoaștere religioasă n-a putut și nu poate înlocui pe cea creștină, fiindcă n-a avut și nu are roadele acesteia. Învățătura creștină stă pe culmea cunoașterii religioase, pentru că nicăieri sufletul credinciosului nu se desfată, ca în Hristos, de adevăr, de dreptate, de fericire, de viață veșnică.`
+},
+
+{
+section:"",
+q:
+"Cum ne putem încredința de Descoperirea Dumnezeiască?",
+
+a:
+`Ne putem încredința de Descoperirea dumnezeiască pe două căi: 1) printr-una personală, aflată în cercetător; 2) prin cealaltă, aflată în cuprinsul Descoperirii. Cea dintâi e credința. Credința e socotită ca Descoperire. Ea singură îngăduie omului să vadă pe Dumnezeu.
+
+Ea singură ne duce într-o lume mai presus de fire și ne înzestrează cu puterea de a deosebi ce e omenesc de ce e mai presus de om.
+
+Cea de-a doua cale prin care ne încredințăm despre Descoperirea dumnezeiască o constituie semnele aflate chiar în Descoperire. Au existat și există semne vădite ale Descoperirii dumnezeiești.`
+},
+
+{
+section:"",
+q:
+"Care sunt semnele adevăratei Descoperiri dumnezeiești?",
+
+a:
+`Semnele Descoperirii dumnezeiești sunt următoarele:
+
+1) Înălțimea învățăturilor descoperite;
+2) Curăția lor dumnezeiască;
+3) Puterea lor de a schimba în bine pe oameni.
+
+Aceste semne sunt lăuntrice și ele pot fi înțelese numai când Descoperirea e bine cunoscută și e cercetată într-un duh de smerenie și de evlavie. Acest duh face fericit pe cel ce se dăruiește unei asemenea cercetări. Despre Descoperirea dumnezeiască ne încredințăm și prin semne din afară: minunile și prorociile, la care putem adăuga și calitatea morală a persoanei prin care se face Descoperirea.`
+},
+
+{
+section:"",
+q:
+"Ce sunt minunile?",
+
+a:
+`Minunile sunt fapte dumnezeiești mai presus de mintea și puterea omenească. Ele sunt fapte săvârșite în firea văzută numai cu puterea lui Dumnezeu. Întrecând legile minții și ale firii, care se săvârșesc în momente extraordinare, hotărâte de Ziditor, și urmăresc luminarea și îndreptarea noastră în vederea mântuirii. Minunile arată voința lui Dumnezeu și tâlcuiesc căile Sale cele necunoscute.
+
+Dumnezeu este Cel dintâi și Cel mai mare făcător de minuni, ca unul Care este Însuși izvorul lor. Mântuitorul a săvârșit pe pământ minuni asupra firii, asupra oamenilor și asupra Sa Însuși.
+
+El a oprit furtuna pe mare, a scăpat pe Petru de la înec, a prefăcut apa în vin, a înmulțit pâinile și peștii, a vindecat bolnavi, a înviat morți, ceea ce-L face să spună: „De n-aș fi făcut întru ei lucruri pe care nimeni altul ne-a făcut, păcat n-ar avea” (Ioan 15, 24).
+
+Dintre minunile pe care Mântuitorul le-a făcut asupra-Si, cea mai mare este învierea Sa dumnezeiască din morți. Minunile Sale dovedesc obârșia și puterea Sa dumnezeiască, așa cum El Însuși declară: „Lucrurile pe care Mi le-a dat Tatăl ca să le săvârșesc, lucrurile acestea pe care le fac Eu, mărturisesc despre Mine și că Tatăl M-a trimis” (Ioan 5, 36).
+
+Minuni au făcut și oamenii aleși de Dumnezeu și plăcuți Lui ca, de pildă, unii dintre aceia prin care s-a dat Descoperirea dumnezeiască: Moise, Ilie, Elisei, Daniel, Iona, Apostolii și alții. Dar aceștia au săvârșit minuni numai cu puterea lui Dumnezeu, dovedind că aveau cu ei puterea Duhului de sus.`
+},
+
+{
+section:"",
+q:
+"După ce se cunosc adevăratele minuni?",
+
+a:
+`Minunile adevărate se deosebesc de cele mincinoase printr-o seamă de condiții, dintre care însemnăm:
+
+1) să fie vrednice de numele lui Dumnezeu și să fie cuprinse în Sfânta Scriptură și în Sfânta Tradiție;
+2) să se producă cu mijloacele cu care s-au produs minunile Mântuitorului și ale sfinților;
+3) să nu se tăgăduiască unele pe altele sau să se opună unele altora;
+4) să nu contrazică Sfânta Scriptură sau Sfânta Tradiție;
+5) să urmărească mântuirea sufletului omenesc;
+6) să aducă folos și spor vieții sufletești, nu morții sau păcatului;
+7) săvârșitorul minunii să grăiască numai adevărul, să ducă o viață fără pată și să nu urmărească interese personale sau scopuri egoiste;
+8) să îndrepte viața morală a celor ce văd minunea;
+9) să poarte în ele siguranța și puterea Duhului lui Dumnezeu;
+10) să dovedească lucrarea proniei dumnezeiești.`
+},
+
+{
+section:"",
+q:
+"Ce sunt prorociile?",
+
+a:
+`Prorociile sau profețiile sunt arătări prin viu grai, sau prin scris, ale anumitor adevăruri și întâmplări care privesc viitorul, pe care Dumnezeu le vestește prin aleșii Săi în vederea mântuirii, și care se petrec întocmai. Cele cuprinse în prorocii nu pot fi cunoscute pe cale firească. Prorociile sau profețiile tâlmăcesc voința lui Dumnezeu și ele se fac numai sub insuflarea Duhului Sfânt. Ele ocupă o bună parte din cărțile Vechiului Testament, unde prevestesc pe Mântuitorul și multe întâmplări din viitorul poporului iudeu și al altor popoare.
+
+Noul Testament însuși și tradiția de la începutul Bisericii cuprind o seamă de prorocii; Mântuitorul Însuși a prorocit (Matei 24 etc.).
+
+Prorociile, ca semne ale Descoperirii dumnezeiești, stau numai în puterea lui Dumnezeu. Ele se deosebesc de prezicerile omenești care se întemeiază sau pe socoteli plăpânde, sau pe superstiții. Prorociile dumnezeiești sunt făcute, ca și minunile, printr-o lucrare necunoscută firii omenești. Marea lor autoritate stă în împlinirea lor. „Fiindcă cele prezise se întâmplă, cred și mă supun lui Dumnezeu”, zice Teofil al Antiohiei. Cele mai însemnate prorocii ale Vechiului Testament sunt cele privitoare la Mântuitorul. Aceste prorocii, numite mesianice, au prezis cu mare siguranță vremea venirii Mântuitorului (Daniel 9, 24-27), nașterea, patimile, moartea, proslăvirea (Isaia 7, 14; 53, 2 s.u.) și chiar slujirile Sale de: profet (Deuteronomul 18, 15; Isaia 42, 1-4), preot și împărat (Psalmii 109, 4-6; Ieremia 23, 5).
+
+Apostolii au arătat că spusele prorocilor despre Mesia-Hristos s-au împlinit întocmai.`
+},
+
+{
+section:"",
+q:
+"După ce semne se cunosc adevăratele prorocii?",
+
+a:
+`Ele trebuie să întrunească aceleași condiții ca minunile.
+
+Mântuitorul, Sfinții Apostoli și Sfinții Părinți atrag în repetate rânduri atenția atât asupra prorocilor adevărați, cât și asupra celor mincinoși, pe care trebuie neapărat să-i deosebim. Pe cât de mult suntem datori să cugetăm cu evlavie la prorociile adevărate, pe atât de mult se cuvine să osândim și să combatem pe cele false.
+
+Mântuitorul spune că în vremurile tulburi și mai ales la sfârșitul lumii „se vor ridica hristoși mincinoși și proroci mincinoși și vor da semne mari și chiar minuni, ca să amăgească, de va fi cu putință, și pe cei aleși” (Matei 24, 24). Asemenea proroci mincinoși s-au ivit deseori și sunt și astăzi, dar ei trebuie să fie combătuți cu stăruință, pentru a nu fi lăsați să-și facă lucrul lor. Lactanțiu spune că adevărații proroci:
+
+1. predică toți un singur Dumnezeu;
+2. nu suferă de nebunie;
+3. nu sunt înșelători;
+4. nu umblă după averi sau câștig;
+5. nu se îngrijesc de cele necesare vieții, ci se mulțumesc cu întreținerea pe care le-o trimite Dumnezeu;
+6. prorociile lor s-au împlinit sau se împlinesc întocmai;
+7. ei își adeveresc trimiterea chiar și prin suferirea chinurilor și a morții.`
+},
+
+{
+section:"",
+q:
+"De ce Dumnezeu nu repetă Descoperirea Sa?",
+
+a:
+`Pentru că El a făcut această Descoperire o dată pentru totdeauna, în vederea mântuirii oamenilor, potrivit planului Său veșnic.
+
+Dumnezeu Se descoperă atunci când știe că aceasta este de cea mai mare trebuință și de cel mai desăvârșit folos. El nu Se repetă ca oamenii, pentru că planul sau iconomia lui Dumnezeu nu cuprinde repetarea Descoperirii. Repetarea învățăturii sau a altui lucru este semnul nedesăvârșirii omenești. Repetarea Descoperirii dumnezeiești – adică o nouă venire a Vechiului și Noului Testament, cu o nouă întrupare, pătimire, moarte și înviere a Domnului nostru Iisus Hristos – ar arăta că prima Descoperire sau a fost înșelătoare, sau n-a avut loc niciodată, sau a fost incompletă, ceea ce ar fi o necuviință față de numele și puterea lui Dumnezeu. Susținerea că repetarea Descoperirii ar face pe toți să creadă nu poate sta în picioare, pentru că nici în timpul Mântuitorului n-au crezut toți în El, cu toate că El era Descoperirea însăși. Învățătura din pilda bogatului și a săracului Lazăr este că cei învârtoșați la inimă nu ar crede chiar dacă ar și învia cineva din morți. (Luca 16, 31).`
+},
+
+{
+section:
+"DESPRE SFÂNTA SCRIPTURĂ",
+
+q:
+"Unde se găsește Descoperirea dumnezeiască cea mai presus de fire?",
+
+a:
+"Descoperirea dumnezeiască cea mai presus de fire se găsește în Sfânta Scriptură și în Sfânta Tradiție."
+},
+
+{
+section:"",
+q:
+"Ce este Sfânta Scriptură?",
+
+a:
+`Sfânta Scriptură sau Biblia este colecția cărților numite ale Vechiului și Noului Testament, scrise sub insuflarea Duhului Sfânt într-un răstimp de aproape 1500 ani, adică de la Moise (cca. 1400 î. Hr.) până la autorul Apocalipsei (cca. 100 d. Hr.). Aceste cărți sunt comoara cea mai prețioasă de lumină și mântuire pe care Dumnezeu a dat-o oamenilor.
+
+Biserica le păstrează ca pe un odor de mare preț și le folosește ca pe un izvor de apă vie, din care soarbe învățătura cea dumnezeiască.`
+},
+
+{
+section:"",
+q:
+"De ce Sfânta Scriptură se mai numește și Biblie?",
+
+a:
+`Cuvântul „Biblie” este de obârșie grecească și însemna „cărți” sau „carte”. „Cărțile” („cartea”) Sfintei Scripturi și-au păstrat de-a lungul veacurilor numele grecesc din Biblie, atât pentru că Sfânta Scriptură a fost scrisă o bună parte în limba greacă, cât și pentru că, la început, în primele veacuri ale creștinismului, învățătura cuprinsă în ea a fost propovăduită mai ales în graiul grecesc, așa cum arată documentele timpului, îndeosebi Sfânta Tradiție. Acest cuvânt, Biblie, care e cel mai întrebuințat atât de creștini, cât și de necreștini, înfățișează deci Sfânta Scriptură ca pe o carte în sine, singura care de-a lungul istoriei și-a păstrat acest nume fără alt adaos și pe care noi, credincioșii, o socotim cartea mai presus de toate celelalte cărți – cartea cărților, cartea pe care, dacă n-o putem numi cea mai mare ca întindere, o putem numi cea mai prețioasă, pentru cuprinsul și roadele ei în sufletele noastre.`
+},
+
+{
+section:"",
+q:
+"Prin ce se deosebește Sfânta Scriptură de celelalte cărți?",
+
+a:
+`1) Sfânta Scriptură se poate citi cu cel mai mare folos de oricine: învățat sau neînvățat, din orice parte a lumii. Ea cuprinde învățături mântuitoare și folositoare, căci ne vorbește despre Dumnezeu și despre mântuirea noastră în comuniune cu Dumnezeu prin Hristos, cu ajutorul harului Duhului Sfânt. „Iar scopul și rostul Sfintei Scripturi este, spune Sfântul Atanasie cel Mare, acea vestire îndoită despre Mântuitorul: că El a fost pururea Dumnezeu și Fiu, fiind Cuvântul și strălucirea și înțelepciunea Tatălui; și că, pe urmă, luând trup pentru noi din Fecioara Maria, Născătoarea de Dumnezeu, S-a făcut om. Iar această îndoită vestire se poate afla, urmărind-o în toată Scriptura de Dumnezeu insuflată”. Cum Însuși Domnul a spus: „Cercetați Scripturile, […] acelea sunt care mărturisesc despre Mine” (Ioan 5, 39). Ea ne învață cum să trăim după voia lui Dumnezeu, adică bine, în înțelesul cel mai deplin al acestui cuvânt.
+
+Sfânta Scriptură spune numai adevărul, căci Duhul Sfânt n-a înșelat pe slujitorii Săi, prorocii. Oamenii nu puteau cunoaște lucruri așa de mari și de dumnezeiești prin firea și prin mintea lor, ci numai printr-un dar coborât de Sus asupra oamenilor sfinți.
+
+2) Sfânta Scriptură are o unitate desăvârșită. Același suflu dumnezeiesc se simte la citirea tuturor cărților ei, deși acestea sunt deosebite între ele din punct de vedere al conținutului și al formei de exprimare. Fiind dată prin Sfântul Duh, Sfânta Scriptură cuprinde adevărul. Nimic nedrept sau prefăcut nu se află într-însa. Sfânta Scriptură nu se contrazice, cum se contrazic învățătorii și scrierile păgâne. Dacă scrierile prorocilor sunt de acord cu Evangheliile, este pentru că toți au vorbit insuflați de un singur Duh, al lui Dumnezeu.
+
+3) Sfânta Scriptură are o putere covârșitoare, prin care a prefăcut și preface nenumărate suflete păcătoase în sfinți. Sfântul Apostol Pavel zice despre deosebita putere a Sfintei Scripturi: „Cuvântul lui Dumnezeu e viu și lucrător și mai ascuțit decât orice sabie cu două tăișuri, și pătrunde până la despărțitura sufletului și duhului, dintre încheieturi și măduvă, și destoinic este să judece simțirile și cugetările inimii” (Evrei 4, 12). Fericitul Ieronim, mare traducător și tâlcuitor al Sfintei Scripturi, se pronunță astfel: „Te rog, spune-mi ce e mai sfânt ca acest cuvânt (al lui Dumnezeu)? Ce e mai plăcut ca această plăcere? Ce mâncăruri, ce feluri de miere sunt mai dulci decât cunoașterea înțelepciunii lui Dumnezeu, decât pătrunderea în locurile Sale ascunse, decât privirea la ideea Ziditorului și la cuvintele Stăpânului tău […], decât ca aceste cuvinte ale Stăpânului, pline de înțelepciune duhovnicească, să învețe pe oameni! Aibă ceilalți averile lor, beie din cupe împodobite cu pietre prețioase, strălucească în stofe de mătase […] fie neputincioși în a-și răpune bogățiile prin felurite plăceri! Desfătarea noastră să stea în a medita la legea Domnului ziua și noaptea, a bate la ușa care ni-I deschisă, a primi pâinile Sfintei Treimi și a merge pe valurile vieții, având pe Domnul călăuză”.`
+},
+
+{
+section:"",
+q:
+"Sfânta Scriptură ne poate călăuzi, ea singură, pe calea mântuirii?",
+
+a:
+`Sfânta Scriptură nu ne poate călăuzi, ea singură, pe calea mântuirii, atât pentru că ea n-a fost dată omenirii de la început, cât și pentru că, atunci când a fost dată, ea n-a fost singura autoritate în această privință, ci a avut înaintea ei și apoi odată cu ea Sfânta Tradiție, în vatra mereu caldă a obștii religioase, sau a Bisericii. Cu mult înainte de a începe Moise să scrie primele cărți ale Vechiului Testament a existat o evlavie a obștii religioase, chiar mai veche decât aceea a Patriarhilor. Cărțile Noului Testament încep să apară, după mai bine de zece ani de la întemeierea Bisericii, în sânul acesteia. Biserica alege cărțile insuflate încă din veacul I după Hristos. Biserica este autoritatea hotărâtoare în această privință, cum și în tâlcuirea textului biblic. Ea este „stâlp și temelie a adevărului” (1 Timotei 3, 15), ea ține „canonul neclintit al adevărului”. În ea lucrează Duhul Sfânt pentru păstrarea neîntinată a adevărului mântuitor. „Unde este Biserica, zice Sfântul Irineu, acolo este și Duhul lui Dumnezeu și unde este Duhul lui Dumnezeu, acolo este Biserica și tot harul, iar Duhul este adevărul”. Iată de ce Sfânta Scriptură nu poate, ea singură, să ne călăuzească pe calea mântuirii, ci numai în Biserică, împreună cu Sfânta Tradiție.`
+},
+
+{
+section:"",
+q:
+"Ce înțelegem prin „canonul” cărților Sfintei Scripturi?",
+
+a:
+`Prin „canonul” cărților Sfintei Scripturi înțelegem totalitatea cărților sfinte insuflate de Dumnezeu, mai precis lista acestor cărți.
+
+Cuvântul „canon” n-a avut acest înțeles de la început. El a fost împrumutat din limba ebraică, prin mijlocirea celei grecești, și însemna, printre altele, „dreptar” sau „regulă”. Cu aceste două înțelesuri îl găsim întrebuințat și în Noul Testament. Sfântul Apostol Pavel, după ce dă anumite sfaturi duhovnicești galatenilor, adaugă: „Și câți vor umbla după dreptarul acesta, pace și milă asupra lor și asupra Israelului lui Dumnezeu” (Galateni 6, 16). Se numesc, apoi, „canoane”, cu înțeles de „rânduială”, hotărârile privitoare la disciplina bisericească și anumite părți care intră în rânduiala slujbelor bisericești. Cărțile Sfintei Scripturi cuprinzând „canonul”, adică regula de credință și de viață, au fost numite „canoane” cu acest înțeles, dar și cu înțelesul de totalitate sau de listă a scrierilor care conțin aceste rânduieli. Cuvântul „canon” are acest înțeles atât la vechii iudei, cât și la primii creștini.
+
+Există un canon al cărților Vechiului Testament și un canon al Noului Testament.`
+},
+
+{
+section:"",
+q:
+"Cu ce condiții au fost primite cărțile Sfintei Scripturi în canonul biblic?",
+
+a:
+`Cu condiția: 1) ca învățătura cuprinsă în ele să fie descoperită de Dumnezeu prin insuflare; și 2) ca învățătura descoperită în ele să fie garantată de Biserică.
+
+Biserica garanta învățătura aceasta pe baza vechimii și apostolicității, după regula lui Tertulian, că acel lucru e mai adevărat care e mai vechi și acel lucru e mai vechi care e de la început, și acel lucru e de la început care vine de la Apostoli, iar de la Apostoli vine ceea ce a fost sfânt în Bisericile Apostolice.`
+},
+
+{
+section:"",
+q:
+"Care sunt cărțile Vechiului Testament?",
+
+a:
+`Cărțile care intră în canonul Vechiului Testament sunt:
+
+1) Facerea
+2) Ieșirea
+3) Leviticul
+4) Numerii
+5) Deuteronomul
+6) Cartea lui Iosua Navi
+7) Cartea Judecătorilor
+8) Cartea Rut
+9) Cartea întâi a Regilor
+10) Cartea a doua a Regilor
+11) Cartea a treia a Regilor
+12) Cartea a patra a Regilor
+13) Cartea întâi Paralipomena (întâi a Cronicilor)
+14) Cartea a doua Paralipomena (a doua a Cronicilor)
+15) Cartea întâi a lui Ezdra
+16) Cartea lui Neemia (a doua Ezdra)
+17) Cartea Esterei
+18) Cartea lui Iov
+19) Psalmii
+20) Pildele lui Solomon
+21) Ecclesiastul
+22) Cântarea Cântărilor
+23) Isaia
+24) Ieremia
+25) Plângerile lui Ieremia
+26) Iezechiel
+27) Daniel
+28) Osea
+29) Amos
+30) Miheia
+31) Ioil
+32) Avdie
+33) Iona
+34) Naum
+35) Avacum
+36) Sofonie
+37) Agheu
+38) Zaharia
+39) Maleahi`
+},
+
+{
+section:"",
+q:
+"În afară de cărțile canonice mai sunt și alte cărți în Sfânta Scriptură a Vechiului Testament?",
+
+a:
+`În afară de cele 39 de cărți canonice, Sfânta Scriptură a Vechiului Testament mai cuprinde și alte cărți: cărțile anaghinoscomena – adică bune de citit, netrecute deci în rândul cărților canonice, dar pe care Biserica, socotindu-le folositoare și ziditoare de suflet, le-a recomandat spre citire catehumenilor, adică celor care se pregăteau să se boteze în credința creștină. De aceea ele au fost păstrate în Sfânta Scriptură și așezate după cărțile canonice. Ele sunt pline de înțelepciune duhovnicească și de aceea Biserica le folosește pe unele dintre ele chiar la sfintele slujbe.
+
+Acestea sunt:
+
+1) Cartea lui Tobit
+2) Cartea Iuditei
+3) Cartea lui Baruh
+4) Epistola lui Ieremia
+5) Cântarea celor trei tineri
+6) Cartea a treia a lui Ezdra
+7) Cartea înțelepciunii lui Solomon
+8) Cartea înțelepciunii lui Isus, fiul lui Sirah (Ecclesiasticul)
+9) Istoria Susanei
+10) Istoria omorârii balaurului și a sfărâmării lui Bel
+11) Cartea întâi a Macabeilor
+12) Cartea a doua a Macabeilor
+13) Cartea a treia a Macabeilor
+14) Rugăciunea regelui Manase.`
+}
+
+];
+
+
+/* =========================================================
+   ELEMENTE HTML
+   ========================================================= */
+
+let current =
+  Number(
+    localStorage.getItem(
+      "catehismCurrent"
+    ) || 0
+  );
+
+
+if(
+  current < 0 ||
+  current >= items.length
+){
+
+  current=0;
+
+}
+
+
+const qEl =
+  document.getElementById(
+    "question"
+  );
+
+
+const aEl =
+  document.getElementById(
+    "answer"
+  );
+
+
+const nEl =
+  document.getElementById(
+    "num"
+  );
+
+
+const cEl =
+  document.getElementById(
+    "counter"
+  );
+
+
+const sEl =
+  document.getElementById(
+    "section"
+  );
+
+
+const pEl =
+  document.getElementById(
+    "progress"
+  );
+
+
+const dotsEl =
+  document.getElementById(
+    "dots"
+  );
+
+
+/* =========================================================
+   PUNCTELE
+   ========================================================= */
+
+function renderDots(){
+
+  dotsEl.innerHTML="";
+
+
+  items.forEach(
+    (_,i)=>{
+
+      const d =
+        document.createElement(
+          "span"
+        );
+
+
+      d.className =
+        "dot" +
+        (
+          i===current
+          ? " active"
+          : ""
+        );
+
+
+      d.title =
+        "Întrebarea " +
+        (i+1);
+
+
+      d.onclick=()=>{
+
+        current=i;
+
+        render();
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+
+      };
+
+
+      dotsEl.appendChild(d);
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function render(){
+
+  const item =
+    items[current];
+
+
+  nEl.textContent =
+    "Întrebarea " +
+    (current+1);
+
+
+  cEl.textContent =
+    (current+1) +
+    " / " +
+    items.length;
+
+
+  sEl.textContent =
+    item.section || "";
+
+
+  sEl.style.display =
+    item.section
+    ? "block"
+    : "none";
+
+
+  qEl.textContent =
+    item.q;
+
+
+  aEl.textContent =
+    item.a;
+
+
+  aEl.style.fontSize =
+    ".92rem";
+
+
+  pEl.style.width =
+    (
+      (current+1) /
+      items.length *
+      100
+    ) +
+    "%";
+
+
+  document
+    .getElementById("prev")
+    .disabled =
+      current===0;
+
+
+  document
+    .getElementById("next")
+    .disabled =
+      current===
+      items.length-1;
+
+
+  localStorage.setItem(
+    "catehismCurrent",
+    current
+  );
+
+
+  renderDots();
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"instant"
+  });
+
+  if (typeof checkPageModeCompletion === "function") {
+    checkPageModeCompletion();
+  }
+
+}
+
+
+/* =========================================================
+   NAVIGARE
+   ========================================================= */
+
+function next(){
+
+  if(
+    current <
+    items.length-1
+  ){
+
+    current++;
+
+    render();
+
+  }
+
+}
+
+
+function prev(){
+
+  if(
+    current > 0
+  ){
+
+    current--;
+
+    render();
+
+  }
+
+}
+
+
+/* =========================================================
+   BUTOANE
+   ========================================================= */
+
+document
+  .getElementById("next")
+  .onclick=next;
+
+
+document
+  .getElementById("prev")
+  .onclick=prev;
+
+
+/* =========================================================
+   FULLSCREEN
+   ========================================================= */
+
+function toggleFullscreen(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  }else{
+    if(document.exitFullscreen){
+      document.exitFullscreen().catch(()=>{});
+    }
+  }
+}
+
+function enterFullscreenAuto(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  }
+}
+
+
+/* =========================================================
+   TASTATURA (SĂGEȚI NAVIGARE + C CLEAN + N NOAPTE + T TIMER + F FULLSCREEN + ENTER)
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key === "Enter"){
+      if(completionOverlay.style.display === "flex"){
+        e.preventDefault();
+        closeCompletion();
+        return;
+      }
+      if(studyOverlay.style.display === "flex"){
+        e.preventDefault();
+        actuallyStartTimer();
+        return;
+      }
+      if(document.getElementById("setupSection").style.display !== "none"){
+        e.preventDefault();
+        document.getElementById("timerStartInit").click();
+        return;
+      }
+      if(!timerPopover.classList.contains("hidden")){
+        e.preventDefault();
+        timerStart.click();
+        return;
+      }
+    }
+
+    if(
+      e.key==="ArrowRight"
+    ){
+
+      next();
+
+    }
+
+    if(
+      e.key==="ArrowLeft"
+    ){
+
+      prev();
+
+    }
+
+    if(
+      e.key.toLowerCase() === "c"
+    ){
+      if(["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+      e.preventDefault();
+      toggleCleanMode();
+    }
+
+    if(
+      e.key.toLowerCase() === "n"
+    ){
+      if(["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+      e.preventDefault();
+      themeToggle.click();
+    }
+
+    if(
+      e.key.toLowerCase() === "t"
+    ){
+      if(["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+      e.preventDefault();
+      timerButton.click();
+    }
+
+    if(
+      e.key.toLowerCase() === "f"
+    ){
+      if(["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+      e.preventDefault();
+      toggleFullscreen();
+    }
+
+  }
+);
+
+
+/* =========================================================
+   MOD ZI / NOAPTE
+   ========================================================= */
+
+const themeToggle =
+  document.getElementById(
+    "themeToggle"
+  );
+
+
+const themeCurtain =
+  document.getElementById(
+    "themeCurtain"
+  );
+
+
+let darkMode =
+  localStorage.getItem(
+    "catehismDarkMode"
+  ) === "true";
+
+
+function applyTheme(){
+
+  if(darkMode){
+
+    document.body
+      .classList
+      .add("dark-mode");
+
+
+    themeToggle.textContent =
+      "☀️";
+
+
+    themeToggle.title =
+      "Treci la modul zi (Tasta N)";
+
+  }
+  else{
+
+    document.body
+      .classList
+      .remove("dark-mode");
+
+
+    themeToggle.textContent =
+      "🌙";
+
+
+    themeToggle.title =
+      "Treci la modul noapte (Tasta N)";
+
+  }
+
+}
+
+
+applyTheme();
+
+
+themeToggle.addEventListener(
+  "click",
+  ()=>{
+
+    themeCurtain
+      .classList
+      .remove("play");
+
+
+    void themeCurtain.offsetWidth;
+
+
+    themeCurtain
+      .classList
+      .add("play");
+
+
+    setTimeout(
+      ()=>{
+
+        darkMode =
+          !darkMode;
+
+
+        localStorage.setItem(
+          "catehismDarkMode",
+          darkMode
+        );
+
+
+        applyTheme();
+
+      },
+      420
+    );
+
+
+    setTimeout(
+      ()=>{
+
+        themeCurtain
+          .classList
+          .remove("play");
+
+      },
+      950
+    );
+
+  }
+);
+
+
+/* =========================================================
+   BARA DE PROGRES LA SCROLL
+   ========================================================= */
+
+function updateScrollProgress(){
+
+  const scrollTop =
+    window.scrollY ||
+    document.documentElement.scrollTop;
+
+
+  const documentHeight =
+    document.documentElement.scrollHeight;
+
+
+  const viewportHeight =
+    window.innerHeight;
+
+
+  const scrollable =
+    documentHeight -
+    viewportHeight;
+
+
+  let percentage=0;
+
+
+  if(scrollable > 0){
+
+    percentage =
+      (scrollTop / scrollable) * 100;
+
+  }
+
+
+  if(scrollable <= 0){
+
+    percentage=100;
+
+  }
+
+
+  pEl.style.width =
+    Math.min(
+      100,
+      Math.max(
+        0,
+        percentage
+      )
+    ) +
+    "%";
+
+}
+
+
+window.addEventListener(
+  "scroll",
+  updateScrollProgress,
+  {
+    passive:true
+  }
+);
+
+
+/* =========================================================
+   RECALCULARE LA REDIMENSIONAREA FERESTREI
+   ========================================================= */
+
+window.addEventListener(
+  "resize",
+  updateScrollProgress
+);
+
+
+/* =========================================================
+   SEMN DE CARTE — PAGINA CURENTĂ
+   ========================================================= */
+
+const bookmarkButton = document.getElementById("bookmarkButton");
+const bookmarkTooltip = document.getElementById("bookmarkTooltip");
+let bookmarkTooltipTimeout = null;
+
+function updateBookmark(){
+  const saved = Number(localStorage.getItem("catehismBookmark") || -1);
+  bookmarkButton.classList.toggle("saved", saved === current);
+  bookmarkButton.title =
+    saved === current
+      ? "Pagina este salvată"
+      : "Salvează pagina";
+}
+
+bookmarkButton.addEventListener("click", ()=>{
+  localStorage.setItem("catehismBookmark", current);
+  updateBookmark();
+
+  bookmarkTooltip.classList.add("show");
+  if(bookmarkTooltipTimeout) clearTimeout(bookmarkTooltipTimeout);
+  bookmarkTooltipTimeout = setTimeout(()=>{
+    bookmarkTooltip.classList.remove("show");
+  }, 3000);
+});
+
+const savedBookmark = Number(localStorage.getItem("catehismBookmark") || -1);
+
+if(savedBookmark >= 0 && savedBookmark < items.length){
+  current = savedBookmark;
+}
+
+
+/* =========================================================
+   MOD CLEAN (ACTIVARE/DEZACTIVARE PRIN TASTA C SAU EMOJI 🔒)
+   ========================================================= */
+
+const cleanButton = document.getElementById("cleanButton");
+
+function toggleCleanMode(){
+  const isClean = document.body.classList.toggle("clean-mode");
+  document.documentElement.classList.toggle("clean-mode", isClean);
+}
+
+cleanButton.addEventListener("click", toggleCleanMode);
+
+
+/* =========================================================
+   TIMER — CHENAR DE PROGRES ÎN JURUL RĂSPUNSULUI & TOOLTIP
+   ========================================================= */
+
+const answerShell = document.getElementById("answerShell");
+const answerTimerFrame = document.getElementById("answerTimerFrame");
+const answerTimerTrack = answerTimerFrame.querySelector(".answer-timer-track");
+const answerTimerProgress = document.getElementById("answerTimerProgress");
+
+const timerButton = document.getElementById("timerButton");
+const timerTooltip = document.getElementById("timerTooltip");
+const timerPopover = document.getElementById("timerPopover");
+const timerClose = document.getElementById("timerClose");
+const timerInput = document.getElementById("timerInput");
+const timerStart = document.getElementById("timerStart");
+const timerCommands = document.getElementById("timerCommands");
+const timerPause = document.getElementById("timerPause");
+const timerStop = document.getElementById("timerStop");
+
+const tabTime = document.getElementById("tabTime");
+const tabPages = document.getElementById("tabPages");
+const timeModeContent = document.getElementById("timeModeContent");
+const pagesModeContent = document.getElementById("pagesModeContent");
+const pageStartInput = document.getElementById("pageStartInput");
+const pageEndInput = document.getElementById("pageEndInput");
+
+// Elementele din ecranul inițial
+const tabPagesInit = document.getElementById("tabPagesInit");
+const tabTimeInit = document.getElementById("tabTimeInit");
+const pagesModeContentInit = document.getElementById("pagesModeContentInit");
+const timeModeContentInit = document.getElementById("timeModeContentInit");
+const pageStartInputInit = document.getElementById("pageStartInputInit");
+const pageEndInputInit = document.getElementById("pageEndInputInit");
+const timerInputInit = document.getElementById("timerInputInit");
+const timerStartInit = document.getElementById("timerStartInit");
+
+const studyOverlay = document.getElementById("studyOverlay");
+const studyButton = document.getElementById("studyButton");
+const completionOverlay = document.getElementById("completionOverlay");
+const prayerRain = document.getElementById("prayerRain");
+
+let currentTab = "pages"; // "time" sau "pages" - Implicit pe Pagini conform cerinței
+let timerDuration = 0;
+let timerRemaining = 0;
+let timerStartedAt = 0;
+let timerPausedElapsed = 0;
+let timerRunning = false;
+let timerPaused = false;
+let timerAnimation = null;
+let timerQuestion = current;
+
+let pageStartVal = 1;
+let pageEndVal = 10;
+
+// Setări de sincronizare taburi
+function switchTab(mode){
+  currentTab = mode;
+  if(mode === "time"){
+    tabTime.classList.add("active");
+    tabPages.classList.remove("active");
+    timeModeContent.style.display = "block";
+    pagesModeContent.style.display = "none";
+
+    tabTimeInit.classList.add("active");
+    tabPagesInit.classList.remove("active");
+    timeModeContentInit.style.display = "block";
+    pagesModeContentInit.style.display = "none";
+  }else{
+    tabPages.classList.add("active");
+    tabTime.classList.remove("active");
+    pagesModeContent.style.display = "block";
+    timeModeContent.style.display = "none";
+
+    tabPagesInit.classList.add("active");
+    tabTimeInit.classList.remove("active");
+    pagesModeContentInit.style.display = "block";
+    timeModeContentInit.style.display = "none";
+
+    pageStartInput.value = current + 1;
+    pageStartInputInit.value = current + 1;
+    if(Number(pageEndInput.value) <= current + 1){
+      pageEndInput.value = Math.min(items.length, current + 5);
+      pageEndInputInit.value = Math.min(items.length, current + 5);
+    }
+  }
+}
+
+tabTime.addEventListener("click", ()=> switchTab("time"));
+tabPages.addEventListener("click", ()=> switchTab("pages"));
+tabTimeInit.addEventListener("click", ()=> switchTab("time"));
+tabPagesInit.addEventListener("click", ()=> switchTab("pages"));
+
+// Preset-uri timp
+document.querySelectorAll(".timer-preset").forEach(button=>{
+  button.addEventListener("click", ()=>{
+    const mins = button.dataset.minutes;
+    timerInput.value = mins;
+    timerInputInit.value = mins;
+  });
+});
+
+function formatTime(ms){
+  const totalSeconds = Math.ceil(ms / 1000);
+  const hrs = Math.floor(totalSeconds / 3600);
+  const mins = Math.floor((totalSeconds % 3600) / 60);
+  const secs = totalSeconds % 60;
+
+  const pad = num => String(num).padStart(2, '0');
+
+  if(hrs > 0){
+    return `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
+  }
+  return `${pad(mins)}:${pad(secs)}`;
+}
+
+function updateTooltipText(){
+  if(currentTab === "pages" && timerRunning){
+    const currPage = current + 1;
+    timerTooltip.textContent = `Pagina ${currPage}/${pageEndVal}`;
+  } else if(timerRunning || timerPaused){
+    timerTooltip.textContent = formatTime(timerRemaining);
+  } else {
+    timerTooltip.textContent = "00:00";
+  }
+}
+
+function setupTimerFrame(){
+  if(!answerShell) return;
+  const w = Math.max(1, answerShell.clientWidth);
+  const h = Math.max(1, answerShell.clientHeight);
+  const radius = Math.min(10, Math.max(4, Math.min(w,h)/8));
+
+  answerTimerFrame.setAttribute("viewBox", `0 0 ${w} ${h}`);
+
+  [answerTimerTrack, answerTimerProgress].forEach(rect=>{
+    rect.setAttribute("x", "1.5");
+    rect.setAttribute("y", "1.5");
+    rect.setAttribute("width", Math.max(1,w-3));
+    rect.setAttribute("height", Math.max(1,h-3));
+    rect.setAttribute("rx", radius);
+  });
+
+  if(currentTab === "pages" && timerRunning){
+    const totalPages = Math.max(1, pageEndVal - pageStartVal + 1);
+    const currPage = current + 1;
+    const readPages = Math.max(0, currPage - pageStartVal + 1);
+    const frac = Math.min(1, readPages / totalPages);
+    setTimerProgress(frac);
+  } else {
+    answerTimerProgress.style.strokeDashoffset =
+      timerDuration > 0
+        ? String(Math.max(0, 1 - (1 - timerRemaining / timerDuration)))
+        : "1";
+  }
+}
+
+function setTimerProgress(fraction){
+  const safe = Math.min(1, Math.max(0, fraction));
+  answerTimerProgress.style.strokeDashoffset = String(1 - safe);
+}
+
+function stopTimerAnimation(){
+  if(timerAnimation){
+    cancelAnimationFrame(timerAnimation);
+    timerAnimation = null;
+  }
+}
+
+function resetTimerState(){
+  stopTimerAnimation();
+  timerDuration = 0;
+  timerRemaining = 0;
+  timerStartedAt = 0;
+  timerPausedElapsed = 0;
+  timerRunning = false;
+  timerPaused = false;
+  timerQuestion = current;
+  timerCommands.style.display = "none";
+  timerPause.textContent = "Ⅱ Pauză";
+  setTimerProgress(0);
+  setupTimerFrame();
+  updateTooltipText();
+}
+
+function openTimerMenu(){
+  positionTimerPopover();
+
+  if(timerRunning || timerPaused){
+    timerCommands.style.display = "grid";
+    timerStart.textContent = "↻ Modifică studiul";
+  }else{
+    timerCommands.style.display = "none";
+    timerStart.textContent = "▶ Începe studiul";
+  }
+
+  timerPopover.classList.remove("hidden");
+  setTimeout(() => {
+    if(currentTab === "time") timerInput.focus();
+    else pageStartInput.focus();
+  }, 50);
+}
+
+function closeTimerMenu(){
+  timerPopover.classList.add("hidden");
+}
+
+function positionTimerPopover(){
+  const r = timerButton.getBoundingClientRect();
+  const width = Math.min(350, window.innerWidth - 28);
+  let left = r.right - width;
+  let top = r.bottom + 9;
+
+  if(left < 14) left = 14;
+  if(left + width > window.innerWidth - 14){
+    left = window.innerWidth - width - 14;
+  }
+
+  if(top + 250 > window.innerHeight){
+    top = Math.max(14, r.top - 260);
+  }
+
+  timerPopover.style.left = `${left}px`;
+  timerPopover.style.top = `${top}px`;
+}
+
+function startTimerFlow(fromInit = false){
+  // Activăm Full Screen și Modul Clean la configurarea timerului
+  enterFullscreenAuto();
+  if(!document.body.classList.contains("clean-mode")){
+    toggleCleanMode();
+  }
+
+  if(fromInit){
+    // Ascundem definitiv secțiunea inițială și afișăm conținutul de studiu
+    document.getElementById("setupSection").style.display = "none";
+    document.getElementById("studyContent").style.display = "block";
+    document.getElementById("floatingTools").style.display = "flex";
+  }
+
+  if(currentTab === "time"){
+    const inputVal = fromInit ? timerInputInit.value : timerInput.value;
+    const minutes = Math.max(1, Math.min(720, Number(inputVal) || 10));
+    timerInput.value = minutes;
+    timerInputInit.value = minutes;
+
+    resetTimerState();
+    timerDuration = minutes * 60 * 1000;
+    timerRemaining = timerDuration;
+    timerQuestion = current;
+  } else {
+    resetTimerState();
+    const startVal = fromInit ? pageStartInputInit.value : pageStartInput.value;
+    const endVal = fromInit ? pageEndInputInit.value : pageEndInput.value;
+
+    let pStart = Number(startVal) || 1;
+    let pEnd = Number(endVal) || items.length;
+    pStart = Math.max(1, Math.min(items.length, pStart));
+    pEnd = Math.max(pStart, Math.min(items.length, pEnd));
+
+    pageStartInput.value = pStart;
+    pageEndInput.value = pEnd;
+    pageStartInputInit.value = pStart;
+    pageEndInputInit.value = pEnd;
+
+    pageStartVal = pStart;
+    pageEndVal = pEnd;
+
+    current = pageStartVal - 1;
+    render();
+  }
+
+  closeTimerMenu();
+
+  studyOverlay.style.display = "flex";
+  document.body.style.overflow = "hidden";
+  setTimeout(() => studyButton.focus(), 50);
+}
+
+function actuallyStartTimer(){
+  studyOverlay.classList.remove("closing");
+  studyOverlay.style.display = "none";
+  document.body.style.overflow = "";
+
+  timerRunning = true;
+  timerPaused = false;
+
+  if(currentTab === "time"){
+    timerStartedAt = performance.now();
+    timerPausedElapsed = 0;
+    timerCommands.style.display = "grid";
+    timerPause.textContent = "Ⅱ Pauză";
+    runTimerFrame();
+  } else {
+    timerCommands.style.display = "grid";
+    timerPause.style.display = "none";
+    setupTimerFrame();
+    updateTooltipText();
+  }
+}
+
+function checkPageModeCompletion(){
+  if(currentTab === "pages" && timerRunning){
+    const currPage = current + 1;
+    if(currPage > pageEndVal){
+      finishTimer();
+    } else {
+      setupTimerFrame();
+      updateTooltipText();
+    }
+  }
+}
+
+function runTimerFrame(){
+  if(!timerRunning || timerPaused || currentTab !== "time") return;
+
+  const elapsed = performance.now() - timerStartedAt;
+  timerRemaining = Math.max(0, timerDuration - elapsed);
+  setTimerProgress(1 - timerRemaining / timerDuration);
+  updateTooltipText();
+
+  if(timerRemaining <= 0){
+    finishTimer();
+    return;
+  }
+
+  timerAnimation = requestAnimationFrame(runTimerFrame);
+}
+
+function pauseTimer(){
+  if(!timerRunning || currentTab !== "time") return;
+
+  if(!timerPaused){
+    timerRemaining = Math.max(
+      0,
+      timerDuration - (performance.now() - timerStartedAt)
+    );
+    timerPaused = true;
+    timerRunning = false;
+    stopTimerAnimation();
+    timerPause.textContent = "▶ Continuă";
+    setTimerProgress(1 - timerRemaining / timerDuration);
+    updateTooltipText();
+  }else{
+    timerPaused = false;
+    timerRunning = true;
+    timerStartedAt = performance.now() - (timerDuration - timerRemaining);
+    timerPause.textContent = "Ⅱ Pauză";
+    runTimerFrame();
+  }
+}
+
+function stopTimer(){
+  resetTimerState();
+  closeTimerMenu();
+}
+
+function finishTimer(){
+  stopTimerAnimation();
+  timerRunning = false;
+  timerPaused = false;
+  timerRemaining = 0;
+  setTimerProgress(1);
+  timerCommands.style.display = "none";
+  updateTooltipText();
+
+  showCompletionRain();
+}
+
+function showCompletionRain(){
+  prayerRain.innerHTML = "";
+
+  const count = Math.max(
+    34,
+    Math.min(64, Math.floor(window.innerWidth / 20))
+  );
+
+  for(let i=0;i<count;i++){
+    const drop = document.createElement("span");
+    drop.className = "prayer-drop";
+    drop.textContent = "🙏";
+    drop.style.left = `${Math.random()*100}%`;
+    drop.style.fontSize = `${18 + Math.random()*17}px`;
+    drop.style.animationDuration = `${5.5 + Math.random()*3.5}s`;
+    drop.style.animationDelay = `${Math.random()*1.8}s`;
+    drop.style.setProperty(
+      "--drift",
+      `${-35 + Math.random()*70}px`
+    );
+    prayerRain.appendChild(drop);
+  }
+
+  completionOverlay.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function closeCompletion(){
+  completionOverlay.style.display = "none";
+  document.body.style.overflow = "";
+  // Ieșire automată din Modul Clean la finalizarea studiului
+  document.body.classList.remove("clean-mode");
+  document.documentElement.classList.remove("clean-mode");
+}
+
+timerButton.addEventListener("click", ()=>{
+  if(timerPopover.classList.contains("hidden")){
+    openTimerMenu();
+  }else{
+    closeTimerMenu();
+  }
+});
+
+timerClose.addEventListener("click", closeTimerMenu);
+
+timerStart.addEventListener("click", ()=>{
+  startTimerFlow(false);
+});
+
+timerStartInit.addEventListener("click", ()=>{
+  startTimerFlow(true);
+});
+
+timerPause.addEventListener("click", pauseTimer);
+timerStop.addEventListener("click", stopTimer);
+
+studyButton.addEventListener("click", ()=>{
+  actuallyStartTimer();
+});
+
+completionOverlay.addEventListener("click", (e)=>{
+  closeCompletion();
+});
+
+document.addEventListener("keydown", e=>{
+  if(e.key === "Escape"){
+    if(completionOverlay.style.display === "flex"){
+      closeCompletion();
+    }else if(!timerPopover.classList.contains("hidden")){
+      closeTimerMenu();
+    }
+  }
+});
+
+document.addEventListener("click", e=>{
+  if(
+    !timerPopover.classList.contains("hidden") &&
+    !timerPopover.contains(e.target) &&
+    !timerButton.contains(e.target)
+  ){
+    closeTimerMenu();
+  }
+});
+
+window.addEventListener("resize", ()=>{
+  setupTimerFrame();
+  if(!timerPopover.classList.contains("hidden")){
+    positionTimerPopover();
+  }
+});
+
+const timerResizeObserver =
+  new ResizeObserver(setupTimerFrame);
+
+timerResizeObserver.observe(answerShell);
+
+/* =========================================================
+   TIMER GENERAL — SE TRANSFERĂ ÎNTRE ÎNTREBĂRI
+   ========================================================= */
+
+const originalRender = render;
+render = function(){
+  originalRender();
+  updateBookmark();
+  requestAnimationFrame(setupTimerFrame);
+};
+
+
+/* =========================================================
+   PORNIRE
+   ========================================================= */
+
+switchTab("pages");
+render();
+updateScrollProgress();
+
+</script>
+
+</body>
+
+</html>

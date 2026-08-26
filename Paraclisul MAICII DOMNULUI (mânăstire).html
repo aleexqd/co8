@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6d3f35">
+<title>Paraclisul Maicii Domnului — 22 de puncte</title>
+<style>
+:root {
+  --bg:#dcd8cf;
+  --paper:#fffdf8;
+  --text:#292722;
+  --muted:#766f63;
+  --accent:#6d3f35;
+  --gold:#a9823f;
+  --line:#ded5c5;
+  --button:#fffaf0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Georgia,"Times New Roman",serif;
+  transition:background .25s,color .25s;
+}
+.topbar{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:62px;
+  z-index:50;
+  background:rgba(255,253,248,.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.top{
+  height:100%;
+  max-width:1000px;
+  margin:auto;
+  padding:0 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.title{
+  color:var(--accent);
+  font-size:clamp(1rem,2.4vw,1.4rem);
+  font-weight:700;
+}
+.controls{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-family:Arial,sans-serif;
+}
+.counter{font-size:.82rem;color:var(--muted);white-space:nowrap}
+button{
+  border:1px solid var(--line);
+  background:var(--button);
+  color:var(--text);
+  border-radius:999px;
+  padding:8px 12px;
+  cursor:pointer;
+  font-size:.95rem;
+}
+.viewport{
+  position:fixed;
+  inset:62px 0 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.book{
+  width:100%;
+  height:100%;
+  position:relative;
+  overflow:hidden;
+}
+.page{
+  position:absolute;
+  inset:0;
+  overflow-y:auto;
+  padding:35px 24px 65px;
+  opacity:0;
+  visibility:hidden;
+  transform:translateX(22px);
+  transition:opacity .16s ease,transform .16s ease,visibility 0s linear .16s;
+}
+.page.active{
+  opacity:1;
+  visibility:visible;
+  transform:translateX(0);
+  transition:opacity .16s ease,transform .16s ease;
+}
+.page-content{
+  max-width:850px;
+  margin:0 auto;
+  min-height:100%;
+}
+.page-header{
+  max-width:850px;
+  margin:0 auto 22px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line);
+  color:var(--muted);
+  font-family:Arial,sans-serif;
+  font-size:.82rem;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.page-number{
+  width:32px;height:32px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:var(--accent);
+  color:white;
+  font-weight:700;
+}
+h2{
+  color:var(--accent);
+  font-size:1.35rem;
+  line-height:1.4;
+  margin:1.7em 0 .7em;
+}
+p{
+  font-size:1.1rem;
+  line-height:1.9;
+  margin:.72em 0;
+}
+.rubric{
+  text-align:center;
+  color:var(--muted);
+  font-style:italic;
+}
+.spacer{height:7px}
+.hint{
+  position:fixed;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:60;
+  background:rgba(43,41,37,.92);
+  color:#fff;
+  padding:7px 13px;
+  border-radius:999px;
+  font:12px Arial,sans-serif;
+  pointer-events:none;
+}
+.progress{
+  position:fixed;
+  left:0;top:61px;
+  height:3px;
+  width:0;
+  z-index:55;
+  background:var(--gold);
+  transition:width .18s ease;
+}
+
+body.dark{
+  --bg:#0c1320;
+  --paper:#151e2d;
+  --text:#e8e4d8;
+  --muted:#b9b09e;
+  --accent:#d5b879;
+  --gold:#b99756;
+  --line:#344052;
+  --button:#202b3c;
+}
+body.dark .topbar{background:rgba(12,19,32,.96)}
+body.dark .hint{background:rgba(235,231,220,.92);color:#111827}
+
+@media(max-width:650px){
+  .topbar{height:56px}
+  .viewport{inset:56px 0 0}
+  .progress{top:55px}
+  .title{font-size:.98rem}
+  .counter{display:none}
+  .page{padding:24px 15px 55px}
+  p{font-size:1rem;line-height:1.78}
+  h2{font-size:1.18rem}
+  .hint{font-size:11px;bottom:9px}
+}
+
+/* =========================================================
+   OPTIMIZARE PROFESIONALĂ PENTRU TELEFON / TOUCH
+   ========================================================= */
+.mobile-next,
+.tap-zone {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  .topbar {
+    height: 58px;
+  }
+
+  .viewport {
+    inset: 58px 0 0;
+    touch-action: pan-y;
+  }
+
+  .progress {
+    top: 57px;
+    height: 3px;
+  }
+
+  .top {
+    padding: 0 12px;
+  }
+
+  .title {
+    font-size: 0.98rem;
+    line-height: 1.15;
+  }
+
+  .controls {
+    gap: 6px;
+  }
+
+  .controls button {
+    min-width: 42px;
+    min-height: 42px;
+    padding: 7px;
+    font-size: 1.05rem;
+  }
+
+  .page {
+    padding: 22px 17px 105px;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  .page-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .page-header {
+    margin-bottom: 18px;
+    font-size: .76rem;
+  }
+
+  .page-number {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+  }
+
+  h2 {
+    font-size: 1.16rem;
+    line-height: 1.42;
+  }
+
+  p {
+    font-size: 1.04rem;
+    line-height: 1.82;
+    margin: .72em 0;
+    overflow-wrap: break-word;
+  }
+
+  .hint {
+    bottom: 83px;
+    font-size: 10px;
+    padding: 6px 10px;
+    opacity: .72;
+    z-index: 60;
+  }
+
+  /* Buton mare, ușor de apăsat cu degetul */
+  .mobile-next {
+    display: flex;
+    position: fixed;
+    z-index: 100;
+    right: 14px;
+    bottom: 14px;
+    width: 58px;
+    height: 58px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,.25);
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .mobile-next:active {
+    transform: scale(.93);
+  }
+
+  .next-icon {
+    font-family: Arial, sans-serif;
+    font-size: 2.15rem;
+    line-height: 1;
+    margin-top: -3px;
+  }
+
+  .next-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* Zone discrete: swipe/tap poate naviga fără să acopere textul */
+  .tap-zone {
+    display: block;
+    position: fixed;
+    top: 58px;
+    bottom: 0;
+    width: 18%;
+    z-index: 40;
+    pointer-events: none;
+    background: transparent;
+  }
+
+  .tap-left {
+    left: 0;
+  }
+
+  .tap-right {
+    right: 0;
+  }
+}
+
+/* Tablete */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .page {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  p {
+    font-size: 1.08rem;
+    line-height: 1.88;
+  }
+}
+
+/* Reduce motion pentru dispozitive/setări care cer asta */
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .progress {
+    transition: none !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="top">
+    <div class="title">☦ Paraclisul Maicii Domnului</div>
+    <div class="controls">
+      <div class="counter" id="counter">1 / 22</div>
+      <button id="themeToggle" type="button" aria-label="Mod nocturn">🌙</button>
+    </div>
+  </div>
+</header>
+
+<div class="progress" id="progress"></div>
+
+<main class="viewport">
+  <div class="book" id="book">
+    
+<section class="page" id="page-1" data-page="1">
+  <div class="page-header">
+    <span class="page-number">1</span>
+    <span>Punctul 1 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Dumnezeu este Domnul și S-a arătat nouă, bine este cuvântat Cel Ce vine întru numele Domnului.</p>
+<div class="spacer"></div>
+<p class="rubric">(de 3 ori)</p>
+<div class="spacer"></div>
+<h2>Troparul, glasul al 4-lea</h2>
+<p>Către Născătoarea de Dumnezeu, acum cu osârdie să alergăm noi păcătoșii și smeriții și să cădem cu pocăință, strigând din adâncul sufletului: stăpână, ajută-ne, milostivindu-te spre noi; grăbește că pierim sub mulțimea păcatelor; nu întoarce pe robii tăi deșerți, că pe tine singură nădejde te-am câștigat.</p>
+<div class="spacer"></div>
+<p>Slavă Tatălui și Fiului și Sfântului Duh,</p>
+<div class="spacer"></div>
+<p>Către Născătoarea de Dumnezeu acum cu osârdie să alergăm noi, păcătoșii și smeriții, și să cădem cu pocăință, strigând din adâncul sufletului: Stăpână, ajută-ne, milostivindu-te spre noi; grăbește, că pierim de mulțimea păcatelor; nu întoarce pe robii tăi deșerți, că pe tine singură nădejde te-am câștigat.</p>
+<div class="spacer"></div>
+<p>Și acum și pururea și în vecii vecilor. Amin!</p>
+<div class="spacer"></div>
+<p>Nu vom tăcea, Născătoare de Dumnezeu, pururea a spune puterile tale noi, nevrednicii. Că, de nu ai fi stat tu înainte rugându-te, cine ne-ar fi izbăvit pe noi din atâtea nevoi? Sau cine ne-ar fi păzit până acum slobozi? Nu ne vom depărta de la tine, Stăpână, că tu izbăvești pe robii tăi pururea din toate nevoile.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-2" data-page="2">
+  <div class="page-header">
+    <span class="page-number">2</span>
+    <span>Punctul 2 din 22</span>
+  </div>
+  <div class="page-content">
+    <h2>Canonul Născătoarei de Dumnezeu</h2>
+<h2>Cântarea I</h2>
+<p>Apa trecând-o ca pe uscat și din răutatea egiptenilor scăpând, israeliteanul striga: Izbăvitorului și Dumnezeului nostru să-I cântăm.</p>
+<div class="spacer"></div>
+<p>Preasfântă Născătoare de Dumnezeu, miluiește-ne pe noi.</p>
+<div class="spacer"></div>
+<p>De multe ispite fiind cuprins, către tine alerg căutând mântuire; o, Maică a Cuvântului și Fecioară, de rele și de nevoi mântuiește-mă.</p>
+<div class="spacer"></div>
+<p>Asupririle chinurilor mă tulbură și de multe scârbe se umple sufletul meu; alină-le, Fecioară, cu liniștea Fiului și Dumnezeului tău, ceea ce ești cu totul fără de prihană.</p>
+<div class="spacer"></div>
+<p>Slavă...</p>
+<div class="spacer"></div>
+<p>Pe tine, ceea ce ai născut pe Mântuitorul și Dumnezeu, te rog, Fecioară, izbăvește-mă din nevoi, că la tine scăpând acum, îmi tind și sufletul și gândul meu.</p>
+<div class="spacer"></div>
+<p>Și acum...</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-3" data-page="3">
+  <div class="page-header">
+    <span class="page-number">3</span>
+    <span>Punctul 3 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Fiind bolnav cu trupul și cu sufletul, cercetării celei dumnezeiești și purtării tale de grijă învrednicește-mă tu, Maica lui Dumnezeu, ca ceea ce ești bună și Născătoarea Celui bun.</p>
+<h2>Cântarea a III-a</h2>
+<div class="spacer"></div>
+<p>Doamne, Cel Ce ai făcut cele de deasupra crugului ceresc și ai zidit Biserica, Tu pe mine mă întărește întru dragostea Ta; că Tu ești marginea doririlor și credincioșilor întărire, „Unule, iubitorule de oameni”.</p>
+<div class="spacer"></div>
+<p>Folositoare și acoperământ vieții mele te pun pe tine, Născătoare de Dumnezeu Fecioară; tu mă îndreptează la adăpostirea ta, ceea ce ești pricina bunătăților și credincioșilor întărire, una întru tot lăudată.</p>
+<div class="spacer"></div>
+<p>Te rog, Fecioară, risipește-mi tulburarea sufletului și viforul necazurilor mele, că tu, Mireasă dumnezeiască, pe Hristos începătorul liniștii ai născut, ceea ce ești de Dumnezeu fericită.</p>
+<div class="spacer"></div>
+<p>Slavă...</p>
+<div class="spacer"></div>
+<p>Ceea ce ai născut pe Făcătorul de bine, Care este pricina bunătăților, bogăția facerii de bine izvorăște-o tuturor, că toate le poți, ca ceea ce ai născut pe Hristos cel puternic întru tărie, una preacurată.</p>
+<div class="spacer"></div>
+<p>Și acum...</p>
+<div class="spacer"></div>
+<p>Fiind cuprins de neputințe cumplite și de chinurile bolilor, tu, Fecioară, ajută-mi; cer ajutorul tău</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-4" data-page="4">
+  <div class="page-header">
+    <span class="page-number">4</span>
+    <span>Punctul 4 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Fiind cuprins de neputințe cumplite și de chinurile bolilor, tu, Fecioară, ajută-mi; cer ajutorul tău Fecioară, că pe tine te știu comoară de tămăduiri neîmpuținată și necheltuită, ceea ce ești cu totul fără de prihană.</p>
+<div class="spacer"></div>
+<p>Izbăvește de nevoi pe robii tăi, Născătoare de Dumnezeu, că toți, după Dumnezeu, la tine scăpăm, ca și către un zid nestricat și folositor.</p>
+<div class="spacer"></div>
+<p>Caută cu milostivire, cu totul lăudată, Născătoare de Dumnezeu, spre necazul cel cumplit al trupului meu și vindecă durerea sufletului meu.</p>
+<div class="spacer"></div>
+<p>Ceea ce ești rugătoare caldă și zid nebiruit, izvor de milă și lumii scăpare, cu dinadinsul strigăm către tine, Născătoare de Dumnezeu, Stăpână: Vino degrab și ne izbăvește pe noi din nevoi, ceea ce ești singura grabnic folositoare.</p>
+<div class="spacer"></div>
+<h2>Cântarea a IV-a</h2>
+<p>Am auzit, Doamne, taina rânduielii Tale, am înțeles lucrurile Tale și am preaslăvit Dumnezeirea Ta.</p>
+<div class="spacer"></div>
+<p>Tulburarea patimilor mele și viforul greșelilor mele alină-le, ceea ce ai născut pe Domnul Îndreptătorul, dumnezeiască Mireasă.</p>
+<div class="spacer"></div>
+<p>Chemând eu adâncul milostivirii tale, dă-mi-l mie, ceea ce ai născut pe Cel milostiv și pe Mântuitorul</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-5" data-page="5">
+  <div class="page-header">
+    <span class="page-number">5</span>
+    <span>Punctul 5 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>tuturor celor ce te laudă pe tine.</p>
+<div class="spacer"></div>
+<p>Slavă...</p>
+<div class="spacer"></div>
+<p>Îndulcindu-ne, Preacurată, cu darurile tale, ție cântare de mulțumire cântăm, știindu-te pe tine Maica lui Dumnezeu.</p>
+<div class="spacer"></div>
+<p>Și acum...</p>
+<div class="spacer"></div>
+<p>Nădejde și întărire și zid de scăpare nemișcat câștigându-te pe tine, ceea ce ești întru tot lăudată, de tot necazul ne izbăvim.</p>
+<div class="spacer"></div>
+<h2>Cântarea a V-a</h2>
+<p>Luminează-ne pe noi, Doamne, cu poruncile Tale și cu brațul Tău cel înalt; pacea Ta dă-ne-o nouă, Iubitorule de oameni.</p>
+<div class="spacer"></div>
+<p>Umple, Preacurată, de veselie viața mea, dăruindu-mi bucuria ta cea nestricată, ceea ce ai născut pricina veseliei.</p>
+<div class="spacer"></div>
+<p>Izbăvește-ne pe noi din nevoi, Născătoare de Dumnezeu, Curată, ceea ce ai născut izbăvirea cea veșnică și Pacea care covârșește toată mintea.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-6" data-page="6">
+  <div class="page-header">
+    <span class="page-number">6</span>
+    <span>Punctul 6 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Slavă...</p>
+<div class="spacer"></div>
+<p>Risipește negura greșelilor mele, dumnezeiască Mireasă, cu strălucirea luminii tale, ceea ce ai născut lumina cea dumnezeiască și veșnică.</p>
+<div class="spacer"></div>
+<p>Și acum...</p>
+<div class="spacer"></div>
+<p>Tămăduiește, Curată, neputința sufletului meu, învrednicindu-mă cercetării tale, și sănătate, cu rugăciunile tale, dăruiește-mi.</p>
+<div class="spacer"></div>
+<h2>Cântarea a VI-a</h2>
+<p>Rugăciunea mea voi vărsa către Domnul și Lui voi spune scârbele mele; că s-a umplut sufletul meu de răutăți și viața mea de iad s-a apropiat, și ca Iona mă rog: Dumnezeule, din stricăciune scoate-mă.</p>
+<div class="spacer"></div>
+<p>Cum a mântuit de moarte și de putrejune firea mea care era ținută de moarte și de putrejune, pe Sine Însuși dându-Se spre moarte, Fecioară, roagă-te Fiului și Dumnezeului tău, să mă izbăvească și de răutățile vrăjmașului.</p>
+<div class="spacer"></div>
+<p>Pe tine te știu folositoare și păzitoare prea tare vieții mele, Fecioară, care risipești tulburarea năpastelor și izgonești asupririle diavolilor; de aceea, mă rog totdeauna: izbăvește-mă de stricăciunea chinurilor mele.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-7" data-page="7">
+  <div class="page-header">
+    <span class="page-number">7</span>
+    <span>Punctul 7 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Slavă...</p>
+<div class="spacer"></div>
+<p>Pe tine, Fecioară, te-am dobândit ca un zid de scăpare și sufletelor mântuire desăvârșită și desfătare întru necazuri; de lumina ta pururea ne bucurăm, o, Stăpână; și acum ne izbăvește din nevoi și din chinuri.</p>
+<div class="spacer"></div>
+<p>Și acum...</p>
+<div class="spacer"></div>
+<p>Acum zac în patul durerilor și nu este tămăduire trupului meu; ci mă rog ție, celei bune, care ai născut pe Dumnezeu, Mântuitorul lumii și Tămăduitorul bolilor, ridică-mă din stricăciunea durerilor.</p>
+<div class="spacer"></div>
+<p>Izbăvește de nevoi pe robii tăi, Născătoare de Dumnezeu, că toți, după Dumnezeu, la tine scăpăm, ca și către un zid nestricat și folositor.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-8" data-page="8">
+  <div class="page-header">
+    <span class="page-number">8</span>
+    <span>Punctul 8 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Caută cu milostivire, cu totul lăudată, Născătoare de Dumnezeu, spre necazul cel cumplit al trupului meu și vindecă durerea sufletului meu.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-9" data-page="9">
+  <div class="page-header">
+    <span class="page-number">9</span>
+    <span>Punctul 9 din 22</span>
+  </div>
+  <div class="page-content">
+    <h2>Condacul, glasul al VI-lea</h2>
+<p>Ceea ce ești păzitoarea creștinilor nebiruită și rugătoare neîncetată către Făcătorul, nu trece cu vederea glasurile cele de rugăciune ale păcătoșilor; ci sârguiește ca o bună spre ajutorul nostru, care cu credință ne rugăm ție: grăbește spre rugăciune și te nevoiește spre îmblânzire, apărând pururea pe cei ce te cinstesc pe tine, Născătoare de Dumnezeu.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-10" data-page="10">
+  <div class="page-header">
+    <span class="page-number">10</span>
+    <span>Punctul 10 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Slavă..., glasul al 2-lea</p>
+<div class="spacer"></div>
+<p>Părinte, Cuvinte și Duhule, Treime Sfântă, curățește mulțimea greșelilor noastre.</p>
+<div class="spacer"></div>
+<p>Și acum...</p>
+<div class="spacer"></div>
+<p>Pentru rugăciunile Născătoarei de Dumnezeu, Milostive, curățește mulțimea greșelilor noastre.</p>
+<div class="spacer"></div>
+<p class="rubric">Stih: Miluiește-ne, Dumnezeule, după mare mila Ta și după mulțimea îndurărilor Tale, curățește fărădelegile noastre.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-11" data-page="11">
+  <div class="page-header">
+    <span class="page-number">11</span>
+    <span>Punctul 11 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Stihirile acestea, glasul al 6-lea</p>
+<p>Ajutorului omenesc nu ne încredința pe noi, Preasfântă Stăpână, ci primește rugăciunea robilor tăi, că necazurile ne cuprind și nu putem răbda săgetările diavolilor; acoperământ nu ne-am agonisit nicăieri unde să scăpăm noi, păcătoșii, pururea fiind biruiți; mângâiere nu avem afară de tine, Stăpâna lumii. Nădejdea și folositoarea credincioșilor, nu trece rugăciunile noastre, ci le fă de folos.</p>
+<div class="spacer"></div>
+<p>Nimeni din cei ce aleargă la tine nu iese rușinat, Născătoare de Dumnezeu Fecioară; ci, cerând dar bun, primește dăruirea către cererea cea de folos.</p>
+<div class="spacer"></div>
+<p>Ajutătoarea celor necăjiți, întărirea celor neputincioși fiind, izbăvește pe robii tăi, Născătoare de Dumnezeu Fecioară, pacea celor din războaie, liniștea celor înviforați, singura folositoare a credincioșilor.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-12" data-page="12">
+  <div class="page-header">
+    <span class="page-number">12</span>
+    <span>Punctul 12 din 22</span>
+  </div>
+  <div class="page-content">
+    <h2>Cântarea a VII-a</h2>
+<p>Tinerii cei ce au mers din Iudeea în Babilon oarecând, cu credința Treimii, văpaia cuptorului au călcat-o, cântând: Dumnezeul părinților noștri, bine ești cuvântat.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-13" data-page="13">
+  <div class="page-header">
+    <span class="page-number">13</span>
+    <span>Punctul 13 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Când ai vrut să rânduiești mântuirea noastră, Mântuitorule, Te-ai sălășluit în pântecele Fecioarei, pe care ai arătat-o folositoare lumii. Bine ești cuvântat, Dumnezeul părinților noștri.</p>
+<div class="spacer"></div>
+<p>Maică preacurată, roagă pe Domnul milei pe Care L-ai născut, să izbăvească de păcate și de întinăciune sufletească pe cei ce cântă cu credință: Bine ești cuvântat, Dumnezeul părinților noștri.</p>
+<div class="spacer"></div>
+<p>Slavă...</p>
+<div class="spacer"></div>
+<p>Comoară de mântuire și izvor de curăție, turn de tărie și ușă de pocăință, pe ceea ce Te-a născut pe Tine ai arătat-o celor ce cântă: Bine ești cuvântat, Dumnezeul părinților noștri.</p>
+<div class="spacer"></div>
+<p>Și acum...</p>
+<div class="spacer"></div>
+<p>De neputințele trupești și de păcatele sufletești pe cei ce vin cu dragoste către acoperământul tău cel dumnezeiesc, învrednicește-i să fie tămăduiți, Născătoare de Dumnezeu, care ai născut nouă pe Mântuitorul Hristos.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-14" data-page="14">
+  <div class="page-header">
+    <span class="page-number">14</span>
+    <span>Punctul 14 din 22</span>
+  </div>
+  <div class="page-content">
+    <h2>Cântarea a VIII-a</h2>
+<p>Nu trece cu vederea pe cei ce au trebuință de ajutor de la tine, Fecioară, pe cei care cântă și te preaînalță întru toți vecii.</p>
+<div class="spacer"></div>
+<p>Tămăduiește neputințele sufletului meu și durerile trupului meu, Fecioară, ca să te slăvesc, Curată, în veci.</p>
+<div class="spacer"></div>
+<p>Binecuvântăm pe Tatăl și pe Fiul și pe Sfântul Duh, Domnul.</p>
+<div class="spacer"></div>
+<p>Bogăție de tămăduiri verși, Fecioară, celor ce te laudă cu credință și preaînalță nașterea ta cea de negrăit.</p>
+<div class="spacer"></div>
+<p>Și acum...</p>
+<div class="spacer"></div>
+<p>Tu izgonești asuprirea și năvălirea patimilor, Fecioară; pentru aceea te lăudăm întru toți vecii.</p>
+<div class="spacer"></div>
+<p>Să lăudăm, bine să cuvântăm și să ne închinăm Domnului, cântându-I și preaînălțându-L pe Dânsul întru toți vecii.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-15" data-page="15">
+  <div class="page-header">
+    <span class="page-number">15</span>
+    <span>Punctul 15 din 22</span>
+  </div>
+  <div class="page-content">
+    <h2>Irmosul</h2>
+<p>Pe împăratul ceresc, pe Care Îl laudă oștile îngerești, lăudați-L și-L preaînălțați întru toți vecii.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-16" data-page="16">
+  <div class="page-header">
+    <span class="page-number">16</span>
+    <span>Punctul 16 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Pe ceea ce este mai înaltă decât cerurile și mai curată decât strălucirile soarelui, care ne-a izbăvit pe noi din blestem, pe Stăpâna lumii, cu cântări să o cinstim.</p>
+<div class="spacer"></div>
+<p>Pentru păcatele mele cele multe mi se bolnăvește trupul, și slăbește sufletul meu; la tine scap, ceea ce ești plină de daruri; nădejdea tuturor celor fără de nădejde, tu îmi ajută.</p>
+<div class="spacer"></div>
+<p>Stăpâna și Maica Izbăvitorului, primește rugăciunea nevrednicilor robilor tăi, ca să fii folositoare către Cel Ce S-a născut din tine, o, Stăpâna lumii, fii mijlocitoare.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-17" data-page="17">
+  <div class="page-header">
+    <span class="page-number">17</span>
+    <span>Punctul 17 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Cântăm cu osârdie acum cântare de bucurie ție, celei întru tot lăudate, Născătoare de Dumnezeu. Cu Înaintemergătorul și cu toți Sfinții, roagă-L, Născătoare de Dumnezeu, ca să ne mântuiască pe noi.</p>
+<div class="spacer"></div>
+<p>Toate oștile îngerești, Înaintemergătorul Domnului, cei doisprezece Apostoli și toți Sfinții, împreună cu Născătoarea de Dumnezeu, faceți rugăciuni ca să ne mântuiască pe noi.</p>
+<div class="spacer"></div>
+<p>Milostivă fii mie, smeritului, că afară de tine altă scăpare nu știu, eu cel ce sunt plin de tot felul de păcate. Miluiește-mă, nădejdea creștinilor.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-18" data-page="18">
+  <div class="page-header">
+    <span class="page-number">18</span>
+    <span>Punctul 18 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Cu adevărat, Născătoare de Dumnezeu, te mărturisim pe tine, Fecioară curată, noi cei izbăviți prin tine, slăvindu-te cu cetele cele fără de trup.</p>
+<div class="spacer"></div>
+<p>Să nu întorci fața ta de la izvorul lacrimilor mele, Fecioară, care ai născut pe Hristos, Cel Ce a șters toată lacrima de pe fața tuturor.</p>
+<div class="spacer"></div>
+<p>Umple de bucurie inima mea, Fecioară, ceea ce ai primit plinirea bucuriei și ai pierdut grija păcatului,</p>
+<div class="spacer"></div>
+<p>Slavă...</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-19" data-page="19">
+  <div class="page-header">
+    <span class="page-number">19</span>
+    <span>Punctul 19 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Cu strălucirea luminii tale luminează, Fecioară, negura neștiinței și o izgonește de la cei ce cu credință te mărturisesc pe tine Născătoare de Dumnezeu.</p>
+<div class="spacer"></div>
+<p>Și acum...</p>
+<div class="spacer"></div>
+<p>Pe mine, care zac de boală în locul cel de răutate, tămăduiește-mă, Fecioară, și mă întoarce dintru nesănătate în sănătate.</p>
+<div class="spacer"></div>
+<h2>Catavasia</h2>
+<p>O, prealuminate nor, Maica lui Dumnezeu, pe cei ce se luptă cu noi surpă-i cu dreapta ta cea stăpânitoare și atotputernică, și celor ce sunt în scârbe le ajută, pe cei asupriți îi mântuiește și dezleagă de păcate pe cei ce se roagă ție, că toate le poți câte le voiești.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-20" data-page="20">
+  <div class="page-header">
+    <span class="page-number">20</span>
+    <span>Punctul 20 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Cuvine-se cu adevărat</p>
+<p>Cuvine-se cu adevărat să te fericim, Născătoare de Dumnezeu, cea pururea fericită și preanevinovată și Maica Dumnezeului nostru. Ceea ce ești mai cinstită decât heruvimii și mai slăvită, fără de asemănare, decât serafimii, care fără stricăciune pe Dumnezeu-Cuvântul ai născut, pe tine, cea cu adevărat Născătoare de Dumnezeu, te mărim.</p>
+<div class="spacer"></div>
+<p>Pentru toți care scapă cu credință sub acoperământul tău cel puternic te rogi, ceea ce ești bună; că noi păcătoșii nu avem altă izbăvire către Dumnezeu în nevoi și în necazuri, pururea fiind încărcați cu multe păcate, Maica Dumnezeului Celui de sus. Pentru aceea, cădem înaintea ta să ne izbăvești pe noi, robii tăi, din toate nevoile.</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-21" data-page="21">
+  <div class="page-header">
+    <span class="page-number">21</span>
+    <span>Punctul 21 din 22</span>
+  </div>
+  <div class="page-content">
+    <p class="rubric">Stih: Pomeni-voi numele tău în tot neamul și neamul.</p>
+<div class="spacer"></div>
+<p>Tuturor scârbiților bucurie și asupriților folositoare și flămânzilor dătătoare de hrană, străinilor mângâiere, celor învăluiți adăpostire, bolnavilor cercetare, celor neputincioși acoperământ și sprijinire, toiag bătrâneților, tu ești, Preacurată, Maica Dumnezeului Celui de sus; pentru aceea, ție ne rugăm: grăbește și miluiește pe robii tăi.</p>
+<div class="spacer"></div>
+<p class="rubric">Stih: Ascultă, fiică, și vezi și pleacă urechea ta și uită poporul tău și casa părintelui tău</p>
+<div class="spacer"></div>
+<p>Bucură-te, Fecioară preacurată; bucură-te, cinstitul sceptru al Împăratului Hristos; bucură-te, ceea ce ai crescut strugurele cel de taină; bucură-te, ușa cerului și rugul cel nears; bucură-te, lumină a toată lumea; bucură-te, bucuria tuturor; bucură-te, mântuirea credincioșilor; bucură-te, apărătoarea și scăparea tuturor creștinilor, Stăpână.</p>
+<div class="spacer"></div>
+<p>Slavă... Și acum...</p>
+<div class="spacer"></div>
+  </div>
+</section>
+<section class="page" id="page-22" data-page="22">
+  <div class="page-header">
+    <span class="page-number">22</span>
+    <span>Punctul 22 din 22</span>
+  </div>
+  <div class="page-content">
+    <p>Muntele Athos neparasind, În Romania că într-un pământ al făgăduinței ai venit preacurat chip al Fecioriei... Carea ai auzit glasul Arhanghelului cantandu-ți dulcea cantare. Vrednica fiind, Vrednica fiind, Vrednica fiind, de cinstea Heruvimilor, intampinandu-te astăzi, o Maica pururea Fecioara. Poporul creștin se bucura și cu lacrimi duhovnicești sarutandu-te iți striga cu credință: Nu ne lasă pe noi robii Tai în viforul ispitelor! O, cum luminează fata ta în sufletele noastre! O, cum tămâiază văzduhul mireasma (3ori) în jurul tău! O, cum ne mângâie venirea, venirea venirii Tale/Ta la noi, de Dumnezeu Născătoare! Deci, nu ne lasă pe noi (3ori), robii tai, în viforul (2ori) ispitelor, ci să fii veșnic liman și adăpostire și mântuire sufletelor noastre.</p>
+  </div>
+</section>
+  </div>
+</main>
+
+<div class="hint" id="hint">SPACE = pagina următoare</div>
+<button class="mobile-next" id="mobileNext" type="button" aria-label="Pagina următoare">
+  <span class="next-icon">›</span>
+  <span class="next-text">Pagina următoare</span>
+</button>
+<div class="tap-zone tap-left" id="tapLeft" aria-hidden="true"></div>
+<div class="tap-zone tap-right" id="tapRight" aria-hidden="true"></div>
+
+<script>
+(() => {
+  const total = 22;
+  let current = 1;
+  const pages = [...document.querySelectorAll(".page")];
+  const counter = document.getElementById("counter");
+  const progress = document.getElementById("progress");
+  const themeToggle = document.getElementById("themeToggle");
+
+  function showPage(n) {
+    if (n < 1) n = 1;
+    if (n > total) n = 1;
+
+    current = n;
+    pages.forEach((p, i) => {
+      p.classList.toggle("active", i === current - 1);
+      if (i === current - 1) p.scrollTop = 0;
+    });
+
+    counter.textContent = `${current} / ${total}`;
+    progress.style.width = `${(current / total) * 100}%`;
+  }
+
+  // =========================================================
+  // NAVIGARE DESKTOP + TELEFON
+  // =========================================================
+  const nextPage = () => showPage(current === total ? 1 : current + 1);
+  const previousPage = () => showPage(current === 1 ? total : current - 1);
+
+  // PC: SPACE / săgeți / PageUp / PageDown
+  document.addEventListener("keydown", e => {
+    const tag = document.activeElement?.tagName;
+    if (["INPUT","TEXTAREA","SELECT","BUTTON"].includes(tag)) return;
+
+    if (e.code === "Space" || e.key === "ArrowRight" || e.key === "PageDown") {
+      e.preventDefault();
+      nextPage();
+    }
+
+    if (e.key === "ArrowLeft" || e.key === "PageUp") {
+      e.preventDefault();
+      previousPage();
+    }
+
+    if (e.key === "Home") {
+      e.preventDefault();
+      showPage(1);
+    }
+
+    if (e.key === "End") {
+      e.preventDefault();
+      showPage(total);
+    }
+  });
+
+  // Telefon/tabletă: buton mare pentru următoarea pagină
+  const mobileNext = document.getElementById("mobileNext");
+  if (mobileNext) {
+    mobileNext.addEventListener("click", e => {
+      e.preventDefault();
+      nextPage();
+    });
+  }
+
+  // Telefon/tabletă: glisare stânga/dreapta
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  document.addEventListener("touchstart", e => {
+    if (!e.touches || !e.touches[0]) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+  }, {passive: true});
+
+  document.addEventListener("touchend", e => {
+    if (!e.changedTouches || !e.changedTouches[0]) return;
+
+    // Dacă utilizatorul a atins butonul, click-ul lui se ocupă deja de navigare.
+    if (e.target.closest?.("#mobileNext, #themeToggle")) return;
+
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    const duration = Date.now() - touchStartTime;
+
+    // Swipe orizontal clar: schimbă pagina.
+    if (duration <= 700 && Math.abs(dx) >= 55 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+      if (dx < 0) nextPage();
+      else previousPage();
+    }
+  }, {passive: true});
+
+  // Butoane suplimentare pentru accesibilitate: atingere în marginea
+  // dreaptă/stângă a ecranului (nu peste text).
+  document.getElementById("tapRight")?.addEventListener("click", nextPage);
+  document.getElementById("tapLeft")?.addEventListener("click", previousPage);
+
+  function applyTheme(theme) {
+    document.body.classList.toggle("dark", theme === "dark");
+    themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+    themeToggle.setAttribute(
+      "aria-label",
+      theme === "dark" ? "Mod luminos" : "Mod nocturn"
+    );
+  }
+
+  let saved = localStorage.getItem("paraclis-theme");
+  if (!saved) {
+    saved = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  applyTheme(saved);
+
+  themeToggle.addEventListener("click", () => {
+    const next = document.body.classList.contains("dark") ? "light" : "dark";
+    localStorage.setItem("paraclis-theme", next);
+    applyTheme(next);
+  });
+
+  showPage(1);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,3948 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Programul meu de lectură</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+<style>
+
+/* =========================================================
+   VARIABILE
+========================================================= */
+
+:root{
+
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#263247;
+    --muted:#718096;
+
+    --primary:#5865f2;
+    --primary-dark:#4149c7;
+
+    --secondary:#8b5cf6;
+    --accent:#06b6d4;
+
+    --green:#10b981;
+    --orange:#f59e0b;
+
+    --border:#e5e9f2;
+
+    --shadow:
+        0 18px 45px rgba(43,55,85,.10);
+
+    --radius:20px;
+
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark{
+
+    --bg:#101522;
+    --card:#171e2d;
+    --text:#edf2ff;
+    --muted:#aab4c8;
+    --border:#293449;
+
+    --shadow:
+        0 18px 45px rgba(0,0,0,.35);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+
+html{
+    scroll-behavior:smooth;
+}
+
+
+body{
+
+    margin:0;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:"DM Sans",sans-serif;
+
+    transition:
+        background .35s ease,
+        color .35s ease;
+
+
+    /* CURSORUL PRINCIPAL */
+
+    cursor:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath d='M5 3 L5 24 L11 18 L15 26 L20 23 L16 15 L25 15 Z' fill='%235865f2' stroke='%23ffffff' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E")
+        4 3,
+        auto;
+
+}
+
+
+button,
+a,
+select,
+input,
+label{
+
+    cursor:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M11 5 C9 5 8 7 9 9 L14 19 L14 11 C14 9 17 9 17 11 L17 18 L18 11 C18 9 21 9 21 11 L21 18 L22 13 C22 11 25 11 25 13 L24 23 C24 27 21 29 17 29 L14 29 C11 29 9 27 7 24 L3 17 C2 15 5 13 6 15 L10 20 L7 10 C6 7 8 5 11 5 Z' fill='%235865f2' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E")
+        12 12,
+        pointer;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:290px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:55px 25px;
+
+    color:white;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(6,182,212,.35),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(139,92,246,.38),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 70% 90%,
+            rgba(88,101,242,.35),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            135deg,
+            #18244a,
+            #283a75 48%,
+            #39266c
+        );
+
+    box-shadow:
+
+        inset 0 -1px 0
+        rgba(255,255,255,.15),
+
+        0 15px 40px
+        rgba(43,55,100,.15);
+
+}
+
+
+.hero::before,
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(2px);
+
+    opacity:.35;
+
+    animation:
+        float 8s ease-in-out infinite;
+
+}
+
+
+.hero::before{
+
+    width:180px;
+    height:180px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #06b6d4,
+            #8b5cf6
+        );
+
+    left:-50px;
+    top:-50px;
+
+}
+
+
+.hero::after{
+
+    width:230px;
+    height:230px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5865f2,
+            #06b6d4
+        );
+
+    right:-70px;
+    bottom:-100px;
+
+    animation-delay:-4s;
+
+}
+
+
+@keyframes float{
+
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(18px,-15px);
+    }
+
+}
+
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+
+    text-align:center;
+
+    max-width:1000px;
+
+}
+
+
+.hero h1{
+
+    margin:0;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(2.2rem,5vw,4rem);
+
+    letter-spacing:-1px;
+
+    text-shadow:
+        0 4px 20px
+        rgba(0,0,0,.25);
+
+}
+
+
+.hero p{
+
+    margin:14px 0 0;
+
+    font-size:1.15rem;
+
+    color:
+        rgba(255,255,255,.82);
+
+    font-weight:500;
+
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.toolbar{
+
+    width:min(1500px,94%);
+
+    margin:25px auto 0;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    justify-content:flex-end;
+
+}
+
+
+.toolbar button{
+
+    border:0;
+
+    padding:11px 17px;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-weight:700;
+
+    transition:.25s;
+
+    box-shadow:
+        0 7px 18px
+        rgba(0,0,0,.10);
+
+}
+
+
+.toolbar button:hover{
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.btn-add{
+
+    background:
+        linear-gradient(
+            135deg,
+            #5865f2,
+            #7c5cff
+        );
+
+}
+
+
+.btn-save{
+
+    background:
+        linear-gradient(
+            135deg,
+            #10b981,
+            #059669
+        );
+
+}
+
+
+.btn-pdf{
+
+    background:
+        linear-gradient(
+            135deg,
+            #f59e0b,
+            #ea580c
+        );
+
+}
+
+
+.btn-info{
+
+    background:
+        linear-gradient(
+            135deg,
+            #06b6d4,
+            #0284c7
+        );
+
+}
+
+
+.btn-dark{
+
+    background:
+        linear-gradient(
+            135deg,
+            #334155,
+            #111827
+        );
+
+}
+
+
+/* =========================================================
+   LOCAL SAVE
+========================================================= */
+
+.local-save{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:8px 12px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    font-size:.9rem;
+
+    color:var(--text);
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.05);
+
+}
+
+
+.local-save input{
+
+    accent-color:
+        var(--primary);
+
+    width:16px;
+    height:16px;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container{
+
+    width:min(1500px,94%);
+
+    margin:22px auto 60px;
+
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.table-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+
+}
+
+
+.table-wrapper{
+
+    width:100%;
+
+    overflow:hidden;
+
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+table{
+
+    width:100%;
+
+    table-layout:fixed;
+
+    border-collapse:collapse;
+
+    font-size:
+        clamp(.78rem,1vw,.96rem);
+
+}
+
+
+th:nth-child(1),
+td:nth-child(1){
+    width:13%;
+}
+
+th:nth-child(2),
+td:nth-child(2){
+    width:7%;
+}
+
+th:nth-child(3),
+td:nth-child(3),
+th:nth-child(4),
+td:nth-child(4){
+    width:6%;
+}
+
+th:nth-child(5),
+td:nth-child(5){
+    width:6%;
+}
+
+th:nth-child(6),
+td:nth-child(6){
+    width:8%;
+}
+
+th:nth-child(7),
+td:nth-child(7),
+th:nth-child(8),
+td:nth-child(8){
+    width:7%;
+}
+
+th:nth-child(9),
+td:nth-child(9){
+    width:7%;
+}
+
+th:nth-child(10),
+td:nth-child(10),
+th:nth-child(11),
+td:nth-child(11){
+    width:8%;
+}
+
+th:nth-child(12),
+td:nth-child(12),
+th:nth-child(13),
+td:nth-child(13){
+    width:8%;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+th{
+
+    padding:15px 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0f3ff,
+            #f8f5ff
+        );
+
+    color:#35405b;
+
+    font-size:
+        clamp(.82rem,1.05vw,1.02rem);
+
+    font-weight:800;
+
+    line-height:1.15;
+
+    border-bottom:
+        2px solid var(--border);
+
+    text-align:center;
+
+    vertical-align:middle;
+
+}
+
+
+body.dark th{
+
+    background:
+        linear-gradient(
+            135deg,
+            #202941,
+            #25263e
+        );
+
+    color:#e9edff;
+
+}
+
+
+/* =========================================================
+   CELLS
+========================================================= */
+
+td{
+
+    padding:10px 5px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    text-align:center;
+
+    vertical-align:middle;
+
+    color:var(--text);
+
+}
+
+
+tbody tr{
+
+    transition:.2s;
+
+}
+
+
+tbody tr:hover{
+
+    background:
+        rgba(88,101,242,.055);
+
+}
+
+
+td:first-child{
+
+    text-align:left;
+
+    font-weight:700;
+
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+input[type="text"],
+input[type="number"]{
+
+    width:100%;
+
+    min-width:0;
+
+    border:
+        1px solid var(--border);
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    border-radius:9px;
+
+    padding:9px 7px;
+
+    outline:none;
+
+    font-size:.92rem;
+
+    transition:
+        border .2s,
+        box-shadow .2s,
+        background .2s;
+
+}
+
+
+input[type="text"]{
+
+    text-align:left;
+
+}
+
+
+input[type="number"]{
+
+    text-align:center;
+
+}
+
+
+.date-input{
+
+    width:100%;
+
+    min-width:0;
+
+    border:
+        1px solid var(--border);
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    border-radius:9px;
+
+    padding:9px 6px;
+
+    outline:none;
+
+    text-align:center;
+
+    font-size:.86rem;
+
+    font-weight:600;
+
+    letter-spacing:.2px;
+
+    transition:.2s;
+
+}
+
+
+input:focus{
+
+    border-color:
+        var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(88,101,242,.12);
+
+}
+
+
+.date-input.invalid{
+
+    border-color:#ef4444;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(239,68,68,.10);
+
+}
+
+
+/* =========================================================
+   AUTO
+========================================================= */
+
+.auto{
+
+    font-weight:800;
+
+    color:var(--primary);
+
+    font-variant-numeric:
+        tabular-nums;
+
+}
+
+
+body.dark .auto{
+
+    color:#9ea7ff;
+
+}
+
+
+.date-value{
+
+    font-weight:700;
+
+    font-size:.88rem;
+
+    white-space:nowrap;
+
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty{
+
+    padding:75px 25px;
+
+    text-align:center;
+
+}
+
+
+.empty-title{
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:1.8rem;
+
+    margin-bottom:10px;
+
+}
+
+
+.empty-text{
+
+    color:var(--muted);
+
+    margin-bottom:25px;
+
+}
+
+
+.first-book{
+
+    border:0;
+
+    padding:15px 25px;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:1rem;
+
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5865f2,
+            #8b5cf6
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(88,101,242,.3);
+
+    transition:.25s;
+
+}
+
+
+.first-book:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(10,15,30,.62);
+
+    backdrop-filter:
+        blur(8px);
+
+    z-index:9999;
+
+    animation:
+        fadeIn .25s ease;
+
+}
+
+
+.modal.active{
+
+    display:flex;
+
+}
+
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+
+.modal-box{
+
+    width:min(620px,95vw);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:32px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.3);
+
+    animation:
+        modalIn .3s
+        cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+@keyframes modalIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(20px)
+            scale(.96);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+.modal-box h2{
+
+    margin-top:0;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:2rem;
+
+}
+
+
+.modal-box p{
+
+    line-height:1.7;
+
+    color:var(--muted);
+
+}
+
+
+/* =========================================================
+   INSTRUCȚIUNI
+========================================================= */
+
+.instructions{
+
+    display:grid;
+
+    gap:10px;
+
+}
+
+
+.instruction-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:12px;
+
+    padding:13px 15px;
+
+    background:var(--bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:13px;
+
+    line-height:1.45;
+
+}
+
+
+.instruction-icon{
+
+    flex:0 0 34px;
+
+    width:34px;
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(88,101,242,.13),
+            rgba(139,92,246,.13)
+        );
+
+    font-size:20px;
+
+}
+
+
+.instruction-content{
+
+    flex:1;
+
+}
+
+
+.instruction-content strong{
+
+    color:var(--primary);
+
+}
+
+
+/* =========================================================
+   MINI TUTORIAL
+========================================================= */
+
+.tutorial-box{
+
+    margin-top:18px;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(88,101,242,.06),
+            rgba(6,182,212,.06)
+        );
+
+}
+
+
+.tutorial-title{
+
+    font-weight:800;
+
+    margin-bottom:12px;
+
+    color:var(--text);
+
+}
+
+
+.tutorial-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    font-size:.86rem;
+
+}
+
+
+.tutorial-table th,
+.tutorial-table td{
+
+    width:auto;
+
+    padding:8px;
+
+    border:
+        1px solid var(--border);
+
+    text-align:center;
+
+    background:var(--card);
+
+}
+
+
+.tutorial-table th{
+
+    font-size:.8rem;
+
+    color:var(--primary);
+
+    background:
+        rgba(88,101,242,.07);
+
+}
+
+
+.tutorial-arrow{
+
+    text-align:center;
+
+    margin:10px 0;
+
+    font-size:1.2rem;
+
+    color:var(--primary);
+
+    font-weight:800;
+
+}
+
+
+/* =========================================================
+   OK
+========================================================= */
+
+.modal-ok{
+
+    display:block;
+
+    margin:28px auto 0;
+
+    border:0;
+
+    padding:11px 35px;
+
+    border-radius:12px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5865f2,
+            #8b5cf6
+        );
+
+    font-weight:800;
+
+    font-size:1rem;
+
+    box-shadow:
+        0 8px 20px
+        rgba(88,101,242,.25);
+
+    transition:.2s;
+
+}
+
+
+.modal-ok:hover{
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+#backTop{
+
+    position:fixed;
+
+    right:24px;
+
+    bottom:24px;
+
+    width:54px;
+
+    height:54px;
+
+    border:0;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:25px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5865f2,
+            #8b5cf6
+        );
+
+    box-shadow:
+        0 12px 28px
+        rgba(88,101,242,.38);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:
+        translateY(15px);
+
+    transition:.3s;
+
+    z-index:5000;
+
+}
+
+
+#backTop.visible{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+        translateY(0);
+
+}
+
+
+#backTop:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.06);
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:25px;
+
+    transform:
+        translate(-50%,30px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    padding:13px 20px;
+
+    border-radius:12px;
+
+    background:#1e293b;
+
+    color:white;
+
+    font-size:.92rem;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.2);
+
+    transition:.3s;
+
+    z-index:10000;
+
+}
+
+
+.toast.show{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,0);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+    table{
+        font-size:.72rem;
+    }
+
+    th{
+        font-size:.76rem;
+        padding:11px 3px;
+    }
+
+    td{
+        padding:7px 3px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    .date-input{
+
+        padding:7px 3px;
+
+        font-size:.78rem;
+
+    }
+
+}
+
+
+@media(max-width:800px){
+
+    .hero{
+
+        min-height:220px;
+
+        padding:40px 15px;
+
+    }
+
+    .hero h1{
+
+        font-size:2.3rem;
+
+    }
+
+    .hero p{
+
+        font-size:1rem;
+
+    }
+
+    .container,
+    .toolbar{
+
+        width:97%;
+
+    }
+
+    table{
+
+        font-size:.63rem;
+
+    }
+
+    th{
+
+        font-size:.65rem;
+
+        padding:9px 2px;
+
+    }
+
+    td{
+
+        padding:5px 2px;
+
+    }
+
+    input[type="text"],
+    input[type="number"],
+    .date-input{
+
+        font-size:.67rem;
+
+        padding:6px 2px;
+
+    }
+
+    #backTop{
+
+        width:48px;
+
+        height:48px;
+
+        right:15px;
+
+        bottom:15px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Programul meu de lectură
+        </h1>
+
+        <p>
+            Organizează-ți lectura. Urmărește-ți ritmul. Progresează.
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     TOOLBAR
+========================================================= -->
+
+<div class="toolbar">
+
+    <button
+        class="btn-add"
+        onclick="addBook()"
+    >
+        ＋ Adaugă carte
+    </button>
+
+
+    <button
+        class="btn-info"
+        onclick="openInstructions()"
+    >
+        ℹ Instrucțiuni
+    </button>
+
+
+    <button
+        class="btn-save"
+        onclick="saveData()"
+    >
+        💾 Salvare
+    </button>
+
+
+    <button
+        class="btn-pdf"
+        onclick="savePDF()"
+    >
+        📄 Salvare PDF
+    </button>
+
+
+    <label class="local-save">
+
+        <input
+            type="checkbox"
+            id="localSave"
+        >
+
+        Salvare locală automată
+
+    </label>
+
+
+    <button
+        class="btn-dark"
+        onclick="toggleDarkMode()"
+    >
+        ◐ Mod întunecat
+    </button>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="container">
+
+    <section class="table-card">
+
+        <div
+            id="emptyState"
+            class="empty"
+        >
+
+            <div class="empty-title">
+                Biblioteca ta începe aici
+            </div>
+
+            <div class="empty-text">
+                Adaugă prima carte și stabilește-ți ritmul de lectură.
+            </div>
+
+            <button
+                class="first-book"
+                onclick="addBook()"
+            >
+                ＋ Adaugă prima carte!
+            </button>
+
+        </div>
+
+
+        <div
+            id="tableWrapper"
+            class="table-wrapper"
+            style="display:none;"
+        >
+
+            <table id="readingTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Cartea</th>
+
+                        <th>
+                            Total<br>
+                            pagini
+                        </th>
+
+                        <th>
+                            Dimineața
+                        </th>
+
+                        <th>
+                            Seara
+                        </th>
+
+                        <th>
+                            Pe zi
+                        </th>
+
+                        <th>
+                            Pe<br>
+                            săptămână
+                        </th>
+
+                        <th>
+                            Pe<br>
+                            lună
+                        </th>
+
+                        <th>
+                            Pe<br>
+                            an
+                        </th>
+
+                        <th>
+                            Durată
+                        </th>
+
+                        <th>
+                            Început
+                        </th>
+
+                        <th>
+                            Sfârșit
+                        </th>
+
+                        <th>
+                            Citire<br>
+                            lună
+                        </th>
+
+                        <th>
+                            Citire<br>
+                            an
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="bookBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     POPUP BUN VENIT
+========================================================= -->
+
+<div
+    id="welcomeModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            Bine ai venit pe site!
+        </h2>
+
+        <p>
+
+            Acesta este programul tău personal de lectură.
+
+            Adaugă cărțile pe care dorești să le citești,
+            stabilește câte pagini citești dimineața și seara,
+            iar restul calculelor vor fi realizate automat.
+
+        </p>
+
+        <button
+            class="modal-ok"
+            onclick="closeModal('welcomeModal')"
+        >
+            Ok!
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     POPUP INSTRUCȚIUNI
+========================================================= -->
+
+<div
+    id="instructionsModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            📖 Instrucțiuni
+        </h2>
+
+
+        <div class="instructions">
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    📚
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Cartea</strong><br>
+
+                    Introdu denumirea cărții pe care dorești să o citești.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    📄
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Total pagini</strong><br>
+
+                    Introdu numărul total de pagini al cărții.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    🌅
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Dimineața</strong><br>
+
+                    Introdu câte pagini dorești să citești dimineața.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    🌙
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Seara</strong><br>
+
+                    Introdu câte pagini dorești să citești seara.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    ☀️
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Pe zi</strong><br>
+
+                    Se calculează automat:
+                    <strong>Dimineața + Seara</strong>.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    📅
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Pe săptămână</strong><br>
+
+                    Numărul estimat de pagini citite într-o săptămână.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    🗓️
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Pe lună</strong><br>
+
+                    Numărul estimat de pagini citite într-o lună.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    📆
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Pe an</strong><br>
+
+                    Numărul estimat de pagini citite într-un an.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    ⏳
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Durată</strong><br>
+
+                    Arată în câte zile vei termina cartea,
+                    în funcție de ritmul stabilit.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    ▶️
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Început</strong><br>
+
+                    Introdu data la care începi cartea.
+                    Format: <strong>DD.MM.YYYY</strong>.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    🏁
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Sfârșit</strong><br>
+
+                    Se calculează automat data estimată la care termini cartea.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    🔄
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Citire lună</strong><br>
+
+                    Arată de câte ori poți parcurge cartea într-o lună,
+                    conform ritmului tău de lectură.
+
+                </div>
+
+            </div>
+
+
+            <div class="instruction-item">
+
+                <div class="instruction-icon">
+                    🔁
+                </div>
+
+                <div class="instruction-content">
+
+                    <strong>Citire an</strong><br>
+
+                    Arată de câte ori poți parcurge cartea într-un an,
+                    conform ritmului tău de lectură.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MINI TUTORIAL -->
+
+        <div class="tutorial-box">
+
+            <div class="tutorial-title">
+                🧭 Exemplu rapid
+            </div>
+
+
+            <table class="tutorial-table">
+
+                <tr>
+
+                    <th>📚 Cartea</th>
+
+                    <th>📄 Total</th>
+
+                    <th>🌅 Dimineața</th>
+
+                    <th>🌙 Seara</th>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>Catehism</td>
+
+                    <td>560</td>
+
+                    <td>10</td>
+
+                    <td>20</td>
+
+                </tr>
+
+            </table>
+
+
+            <div class="tutorial-arrow">
+                ↓
+            </div>
+
+
+            <table class="tutorial-table">
+
+                <tr>
+
+                    <th>☀️ Pe zi</th>
+
+                    <th>📅 Pe săptămână</th>
+
+                    <th>🗓️ Pe lună</th>
+
+                    <th>📆 Pe an</th>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>30</td>
+
+                    <td>210</td>
+
+                    <td>900</td>
+
+                    <td>10.950</td>
+
+                </tr>
+
+            </table>
+
+
+            <div class="tutorial-arrow">
+                ↓
+            </div>
+
+
+            <div
+                style="
+                    text-align:center;
+                    color:var(--muted);
+                    font-size:.88rem;
+                "
+            >
+
+                🧮 Restul valorilor sunt calculate automat
+                în funcție de datele introduse.
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="modal-ok"
+            onclick="closeModal('instructionsModal')"
+        >
+            Ok!
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     BACK TO TOP
+========================================================= -->
+
+<button
+    id="backTop"
+    onclick="goTop()"
+    title="Mergi sus"
+>
+    ↑
+</button>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURARE
+========================================================= */
+
+const STORAGE_KEY =
+    "program_lectura_data_v3";
+
+const DARK_KEY =
+    "program_lectura_dark_v3";
+
+
+let books = [];
+
+
+/* =========================================================
+   INITIALIZARE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        loadData();
+
+        loadDarkMode();
+
+        updateInterface();
+
+
+        /*
+         =====================================================
+         POPUP BUN VENIT
+
+         Apare la fiecare deschidere a site-ului.
+         Nu mai este blocat de localStorage.
+         =====================================================
+        */
+
+        setTimeout(
+            () => {
+
+                document
+                    .getElementById(
+                        "welcomeModal"
+                    )
+                    .classList.add(
+                        "active"
+                    );
+
+            },
+            500
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MODALE
+========================================================= */
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("active");
+
+}
+
+
+function openInstructions(){
+
+    document
+        .getElementById(
+            "instructionsModal"
+        )
+        .classList.add("active");
+
+}
+
+
+document
+    .querySelectorAll(".modal")
+    .forEach(modal => {
+
+        modal.addEventListener(
+            "click",
+            event => {
+
+                if(
+                    event.target === modal
+                ){
+
+                    modal.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    });
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(event.key === "Escape"){
+
+            document
+                .querySelectorAll(
+                    ".modal.active"
+                )
+                .forEach(modal => {
+
+                    modal.classList.remove(
+                        "active"
+                    );
+
+                });
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ADAUGĂ CARTE
+========================================================= */
+
+function addBook(){
+
+    books.push({
+
+        title:"",
+        total:0,
+        morning:0,
+        evening:0,
+        start:""
+
+    });
+
+
+    updateInterface();
+
+
+    setTimeout(
+        () => {
+
+            const rows =
+                document.querySelectorAll(
+                    "#bookBody tr"
+                );
+
+
+            const row =
+                rows[rows.length - 1];
+
+
+            if(row){
+
+                const input =
+                    row.querySelector(
+                        ".title-input"
+                    );
+
+
+                if(input){
+
+                    input.focus();
+
+                }
+
+            }
+
+        },
+        50
+    );
+
+}
+
+
+/* =========================================================
+   INTERFAȚĂ
+========================================================= */
+
+function updateInterface(){
+
+    const empty =
+        document.getElementById(
+            "emptyState"
+        );
+
+    const table =
+        document.getElementById(
+            "tableWrapper"
+        );
+
+
+    if(books.length === 0){
+
+        empty.style.display = "block";
+
+        table.style.display = "none";
+
+        return;
+
+    }
+
+
+    empty.style.display = "none";
+
+    table.style.display = "block";
+
+
+    renderTable();
+
+}
+
+
+/* =========================================================
+   RENDER TABEL
+========================================================= */
+
+function renderTable(){
+
+    const body =
+        document.getElementById(
+            "bookBody"
+        );
+
+
+    body.innerHTML = "";
+
+
+    books.forEach(
+        (book,index) => {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.dataset.index = index;
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <input
+                        class="title-input"
+                        type="text"
+                        value="${escapeHTML(book.title)}"
+                        placeholder="Numele cărții"
+                        data-index="${index}"
+                    >
+
+                </td>
+
+
+                <td>
+
+                    <input
+                        class="number-input"
+                        type="number"
+                        min="0"
+                        step="1"
+                        value="${book.total || 0}"
+                        data-index="${index}"
+                        data-key="total"
+                    >
+
+                </td>
+
+
+                <td>
+
+                    <input
+                        class="number-input"
+                        type="number"
+                        min="0"
+                        step="1"
+                        value="${book.morning || 0}"
+                        data-index="${index}"
+                        data-key="morning"
+                    >
+
+                </td>
+
+
+                <td>
+
+                    <input
+                        class="number-input"
+                        type="number"
+                        min="0"
+                        step="1"
+                        value="${book.evening || 0}"
+                        data-index="${index}"
+                        data-key="evening"
+                    >
+
+                </td>
+
+
+                <td
+                    class="auto"
+                    data-auto="day-${index}"
+                >
+                    0
+                </td>
+
+
+                <td
+                    class="auto"
+                    data-auto="week-${index}"
+                >
+                    0
+                </td>
+
+
+                <td
+                    class="auto"
+                    data-auto="month-${index}"
+                >
+                    0
+                </td>
+
+
+                <td
+                    class="auto"
+                    data-auto="year-${index}"
+                >
+                    0
+                </td>
+
+
+                <td
+                    class="auto"
+                    data-auto="duration-${index}"
+                >
+                    —
+                </td>
+
+
+                <td>
+
+                    <input
+                        class="date-input"
+                        type="text"
+                        inputmode="numeric"
+                        maxlength="10"
+                        placeholder="DD.MM.YYYY"
+                        value="${book.start || ""}"
+                        data-index="${index}"
+                    >
+
+                </td>
+
+
+                <td
+                    class="date-value"
+                    data-auto="end-${index}"
+                >
+                    —
+                </td>
+
+
+                <td
+                    class="auto"
+                    data-auto="monthly-${index}"
+                >
+                    —
+                </td>
+
+
+                <td
+                    class="auto"
+                    data-auto="yearly-${index}"
+                >
+                    —
+                </td>
+
+            `;
+
+
+            body.appendChild(row);
+
+
+            updateCalculatedCells(index);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+document
+    .getElementById("bookBody")
+    .addEventListener(
+        "input",
+        event => {
+
+            const target =
+                event.target;
+
+
+            const index =
+                Number(
+                    target.dataset.index
+                );
+
+
+            if(
+                Number.isNaN(index) ||
+                !books[index]
+            ){
+
+                return;
+
+            }
+
+
+            /* CARTE */
+
+            if(
+                target.classList.contains(
+                    "title-input"
+                )
+            ){
+
+                books[index].title =
+                    target.value;
+
+                autoSave();
+
+                return;
+
+            }
+
+
+            /* NUMERE */
+
+            if(
+                target.classList.contains(
+                    "number-input"
+                )
+            ){
+
+                let value =
+                    target.value
+                    .replace(
+                        /[^0-9]/g,
+                        ""
+                    );
+
+
+                target.value = value;
+
+
+                books[index][
+                    target.dataset.key
+                ] =
+                    value === ""
+                    ? 0
+                    : Number(value);
+
+
+                updateCalculatedCells(index);
+
+                autoSave();
+
+                return;
+
+            }
+
+
+            /* DATA */
+
+            if(
+                target.classList.contains(
+                    "date-input"
+                )
+            ){
+
+                let value =
+                    target.value
+                    .replace(
+                        /[^0-9]/g,
+                        ""
+                    );
+
+
+                target.value =
+                    formatDateTyping(value);
+
+
+                /*
+                 NU CALCULĂM DATA FINALĂ
+                 PÂNĂ CÂND DATA NU ESTE
+                 COMPLETĂ.
+                */
+
+                if(
+                    isCompleteDate(
+                        target.value
+                    )
+                ){
+
+                    if(
+                        isValidRomanianDate(
+                            target.value
+                        )
+                    ){
+
+                        target.classList.remove(
+                            "invalid"
+                        );
+
+
+                        books[index].start =
+                            target.value;
+
+
+                        updateCalculatedCells(
+                            index
+                        );
+
+
+                        autoSave();
+
+                    }
+                    else{
+
+                        target.classList.add(
+                            "invalid"
+                        );
+
+                    }
+
+                }
+                else{
+
+                    target.classList.remove(
+                        "invalid"
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   FORMAT DATA ÎN TIMPUL TASTĂRII
+========================================================= */
+
+function formatDateTyping(value){
+
+    let digits =
+        value.replace(
+            /\D/g,
+            ""
+        );
+
+
+    if(
+        digits.length > 8
+    ){
+
+        digits =
+            digits.substring(
+                0,
+                8
+            );
+
+    }
+
+
+    if(
+        digits.length <= 2
+    ){
+
+        return digits;
+
+    }
+
+
+    if(
+        digits.length <= 4
+    ){
+
+        return (
+
+            digits.substring(0,2)
+
+            +
+
+            "."
+
+            +
+
+            digits.substring(2)
+
+        );
+
+    }
+
+
+    return (
+
+        digits.substring(0,2)
+
+        +
+
+        "."
+
+        +
+
+        digits.substring(2,4)
+
+        +
+
+        "."
+
+        +
+
+        digits.substring(4,8)
+
+    );
+
+}
+
+
+/* =========================================================
+   DATA COMPLETĂ
+========================================================= */
+
+function isCompleteDate(value){
+
+    return /^\d{2}\.\d{2}\.\d{4}$/.test(
+        value
+    );
+
+}
+
+
+/* =========================================================
+   VALIDARE DATA
+========================================================= */
+
+function isValidRomanianDate(value){
+
+    if(
+        !isCompleteDate(value)
+    ){
+
+        return false;
+
+    }
+
+
+    const parts =
+        value.split(".");
+
+
+    const day =
+        Number(parts[0]);
+
+
+    const month =
+        Number(parts[1]);
+
+
+    const year =
+        Number(parts[2]);
+
+
+    if(
+        month < 1 ||
+        month > 12 ||
+        day < 1 ||
+        year < 1000
+    ){
+
+        return false;
+
+    }
+
+
+    const date =
+        new Date(
+            year,
+            month - 1,
+            day
+        );
+
+
+    return (
+
+        date.getFullYear() === year
+
+        &&
+
+        date.getMonth() === month - 1
+
+        &&
+
+        date.getDate() === day
+
+    );
+
+}
+
+
+/* =========================================================
+   BLUR DATA
+========================================================= */
+
+document
+    .getElementById("bookBody")
+    .addEventListener(
+        "blur",
+        event => {
+
+            const target =
+                event.target;
+
+
+            if(
+                !target.classList.contains(
+                    "date-input"
+                )
+            ){
+
+                return;
+
+            }
+
+
+            const index =
+                Number(
+                    target.dataset.index
+                );
+
+
+            if(
+                isCompleteDate(
+                    target.value
+                )
+                &&
+                isValidRomanianDate(
+                    target.value
+                )
+            ){
+
+                books[index].start =
+                    target.value;
+
+
+                target.classList.remove(
+                    "invalid"
+                );
+
+
+                updateCalculatedCells(
+                    index
+                );
+
+
+                autoSave();
+
+            }
+
+        },
+        true
+    );
+
+
+/* =========================================================
+   ENTER - NAVIGARE ÎNTRE CÂMPURI
+========================================================= */
+
+document
+    .getElementById("bookBody")
+    .addEventListener(
+        "keydown",
+        event => {
+
+            if(
+                event.key !== "Enter"
+            ){
+
+                return;
+
+            }
+
+
+            const target =
+                event.target;
+
+
+            const row =
+                target.closest("tr");
+
+
+            if(!row){
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+
+            const fields = [
+
+                ".title-input",
+
+                'input[data-key="total"]',
+
+                'input[data-key="morning"]',
+
+                'input[data-key="evening"]',
+
+                ".date-input"
+
+            ];
+
+
+            const current =
+                fields.findIndex(
+                    selector =>
+                        target.matches(
+                            selector
+                        )
+                );
+
+
+            if(current === -1){
+
+                return;
+
+            }
+
+
+            /*
+             =================================================
+             DACĂ SUNTEM LA DATA DE ÎNCEPUT
+             ȘI DATA ESTE COMPLETĂ + VALIDĂ:
+
+             1. salvăm data
+             2. calculăm sfârșitul
+             3. creăm automat rând nou
+             4. mergem automat în CARTEA noului rând
+             =================================================
+            */
+
+            if(
+                target.classList.contains(
+                    "date-input"
+                )
+            ){
+
+                if(
+                    isValidRomanianDate(
+                        target.value
+                    )
+                ){
+
+                    const index =
+                        Number(
+                            target.dataset.index
+                        );
+
+
+                    books[index].start =
+                        target.value;
+
+
+                    target.classList.remove(
+                        "invalid"
+                    );
+
+
+                    updateCalculatedCells(
+                        index
+                    );
+
+
+                    autoSave();
+
+
+                    /*
+                     CREAȚI RÂNDUL NOU
+                    */
+
+                    books.push({
+
+                        title:"",
+                        total:0,
+                        morning:0,
+                        evening:0,
+                        start:""
+
+                    });
+
+
+                    updateInterface();
+
+
+                    /*
+                     FOCUS AUTOMAT PE
+                     CARTEA NOULUI RÂND
+                    */
+
+                    setTimeout(
+                        () => {
+
+                            const rows =
+                                document.querySelectorAll(
+                                    "#bookBody tr"
+                                );
+
+
+                            const newRow =
+                                rows[
+                                    rows.length - 1
+                                ];
+
+
+                            if(newRow){
+
+                                const newInput =
+                                    newRow.querySelector(
+                                        ".title-input"
+                                    );
+
+
+                                if(newInput){
+
+                                    newInput.focus();
+
+                                }
+
+                            }
+
+                        },
+                        50
+                    );
+
+
+                    return;
+
+                }
+
+
+                /*
+                 Dacă data nu este validă,
+                 NU creăm rând nou.
+                */
+
+                target.classList.add(
+                    "invalid"
+                );
+
+                return;
+
+            }
+
+
+            /*
+             TRECERE NORMALĂ LA URMĂTORUL CÂMP
+            */
+
+            const next =
+                fields[current + 1];
+
+
+            if(next){
+
+                const nextInput =
+                    row.querySelector(
+                        next
+                    );
+
+
+                if(nextInput){
+
+                    nextInput.focus();
+
+
+                    if(
+                        nextInput.type === "number"
+                    ){
+
+                        nextInput.select();
+
+                    }
+
+                }
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   CALCULE
+========================================================= */
+
+function updateCalculatedCells(index){
+
+    const book =
+        books[index];
+
+
+    const morning =
+        Number(
+            book.morning || 0
+        );
+
+
+    const evening =
+        Number(
+            book.evening || 0
+        );
+
+
+    const total =
+        Number(
+            book.total || 0
+        );
+
+
+    const perDay =
+        morning + evening;
+
+
+    const perWeek =
+        perDay * 7;
+
+
+    const perMonth =
+        perDay * 30;
+
+
+    const perYear =
+        perDay * 365;
+
+
+    let duration = 0;
+
+
+    if(
+        total > 0 &&
+        perDay > 0
+    ){
+
+        duration =
+            Math.ceil(
+                total / perDay
+            );
+
+    }
+
+
+    setCell(
+        `day-${index}`,
+        perDay || 0
+    );
+
+
+    setCell(
+        `week-${index}`,
+        perWeek || 0
+    );
+
+
+    setCell(
+        `month-${index}`,
+        perMonth || 0
+    );
+
+
+    setCell(
+        `year-${index}`,
+        perYear || 0
+    );
+
+
+    setCell(
+        `duration-${index}`,
+        duration
+        ? duration + " zile"
+        : "—"
+    );
+
+
+    let endDate = "";
+
+
+    if(
+        duration &&
+        isValidRomanianDate(
+            book.start
+        )
+    ){
+
+        const start =
+            parseRomanianDate(
+                book.start
+            );
+
+
+        /*
+         EXACT aceeași logică:
+         durata 1 zi = aceeași zi.
+        */
+
+        start.setDate(
+            start.getDate()
+            +
+            duration
+            -
+            1
+        );
+
+
+        endDate =
+            formatRomanianDate(
+                start
+            );
+
+    }
+
+
+    setCell(
+        `end-${index}`,
+        endDate || "—"
+    );
+
+
+    let monthlyReads = "";
+
+
+    if(
+        total > 0 &&
+        perMonth > 0
+    ){
+
+        monthlyReads =
+            formatNumber(
+                perMonth / total
+            );
+
+    }
+
+
+    let yearlyReads = "";
+
+
+    if(
+        total > 0 &&
+        perYear > 0
+    ){
+
+        yearlyReads =
+            formatNumber(
+                perYear / total
+            );
+
+    }
+
+
+    setCell(
+        `monthly-${index}`,
+        monthlyReads || "—"
+    );
+
+
+    setCell(
+        `yearly-${index}`,
+        yearlyReads || "—"
+    );
+
+}
+
+
+/* =========================================================
+   SET CELL
+========================================================= */
+
+function setCell(key,value){
+
+    const cell =
+        document.querySelector(
+            `[data-auto="${key}"]`
+        );
+
+
+    if(cell){
+
+        cell.textContent =
+            value;
+
+    }
+
+}
+
+
+/* =========================================================
+   PARSARE DATA
+========================================================= */
+
+function parseRomanianDate(value){
+
+    const parts =
+        value.split(".");
+
+
+    return new Date(
+
+        Number(parts[2]),
+
+        Number(parts[1]) - 1,
+
+        Number(parts[0])
+
+    );
+
+}
+
+
+/* =========================================================
+   FORMATARE DATA
+========================================================= */
+
+function formatRomanianDate(date){
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(2,"0");
+
+
+    const month =
+        String(
+            date.getMonth() + 1
+        ).padStart(2,"0");
+
+
+    const year =
+        date.getFullYear();
+
+
+    return (
+
+        day
+        +
+        "."
+        +
+        month
+        +
+        "."
+        +
+        year
+
+    );
+
+}
+
+
+/* =========================================================
+   NUMERE
+========================================================= */
+
+function formatNumber(number){
+
+    if(
+        !isFinite(number)
+    ){
+
+        return "";
+
+    }
+
+
+    return Number(
+        number.toFixed(2)
+    ).toString();
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(
+        value || ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   AUTO SAVE
+========================================================= */
+
+function autoSave(){
+
+    const checkbox =
+        document.getElementById(
+            "localSave"
+        );
+
+
+    if(
+        checkbox &&
+        checkbox.checked
+    ){
+
+        localStorage.setItem(
+
+            STORAGE_KEY,
+
+            JSON.stringify(
+                books
+            )
+
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+function saveData(){
+
+    localStorage.setItem(
+
+        STORAGE_KEY,
+
+        JSON.stringify(
+            books
+        )
+
+    );
+
+
+    showToast(
+        "Datele au fost salvate."
+    );
+
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+function loadData(){
+
+    try{
+
+        const saved =
+            localStorage.getItem(
+                STORAGE_KEY
+            );
+
+
+        if(saved){
+
+            books =
+                JSON.parse(
+                    saved
+                );
+
+        }
+
+    }
+    catch(error){
+
+        books = [];
+
+    }
+
+}
+
+
+/* =========================================================
+   LOCAL SAVE
+========================================================= */
+
+document
+    .getElementById("localSave")
+    .addEventListener(
+        "change",
+        function(){
+
+            if(this.checked){
+
+                localStorage.setItem(
+
+                    STORAGE_KEY,
+
+                    JSON.stringify(
+                        books
+                    )
+
+                );
+
+
+                showToast(
+                    "Salvarea automată a fost activată."
+                );
+
+            }
+            else{
+
+                showToast(
+                    "Salvarea automată a fost dezactivată."
+                );
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+
+        DARK_KEY,
+
+        dark
+        ? "1"
+        : "0"
+
+    );
+
+}
+
+
+function loadDarkMode(){
+
+    if(
+        localStorage.getItem(
+            DARK_KEY
+        ) === "1"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const button =
+            document.getElementById(
+                "backTop"
+            );
+
+
+        if(
+            window.scrollY > 350
+        ){
+
+            button.classList.add(
+                "visible"
+            );
+
+        }
+        else{
+
+            button.classList.remove(
+                "visible"
+            );
+
+        }
+
+    }
+);
+
+
+function goTop(){
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
+}
+
+
+/* =========================================================
+   PDF
+========================================================= */
+
+async function savePDF(){
+
+    if(
+        books.length === 0
+    ){
+
+        showToast(
+            "Nu există încă nicio carte."
+        );
+
+        return;
+
+    }
+
+
+    showToast(
+        "Se pregătește PDF-ul..."
+    );
+
+
+    const table =
+        document.getElementById(
+            "readingTable"
+        );
+
+
+    /*
+     ========================================================
+     TABELUL ESTE CAPTURAT CA IMAGINE.
+     Astfel, diacriticele din tabel sunt păstrate.
+     ========================================================
+    */
+
+    const canvas =
+        await html2canvas(
+
+            table,
+
+            {
+
+                scale:2,
+
+                backgroundColor:
+
+                    document.body.classList.contains(
+                        "dark"
+                    )
+
+                    ? "#171e2d"
+
+                    : "#ffffff"
+
+            }
+
+        );
+
+
+    const {
+        jsPDF
+    } =
+        window.jspdf;
+
+
+    const pdf =
+        new jsPDF(
+
+            "landscape",
+
+            "mm",
+
+            "a4"
+
+        );
+
+
+    const imgData =
+        canvas.toDataURL(
+            "image/png"
+        );
+
+
+    const pageWidth =
+        pdf.internal.pageSize.getWidth();
+
+
+    const pageHeight =
+        pdf.internal.pageSize.getHeight();
+
+
+    const margin = 10;
+
+
+    const availableWidth =
+        pageWidth -
+        margin * 2;
+
+
+    const ratio =
+        availableWidth /
+        canvas.width;
+
+
+    const imageHeight =
+        canvas.height *
+        ratio;
+
+
+    /*
+     ========================================================
+     TITLUL PDF
+
+     IMPORTANT:
+     Nu folosim pdf.text() pentru diacritice.
+
+     Helvetica-ul implicit al jsPDF nu știe corect caracterul
+     românesc „ă”.
+
+     În schimb, generăm titlul într-un canvas HTML și îl
+     introducem în PDF ca imagine. Astfel:
+
+     Programul meu de lectură
+
+     apare cu „ă” corect.
+     ========================================================
+    */
+
+    const titleCanvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    const titleContext =
+        titleCanvas.getContext(
+            "2d"
+        );
+
+
+    titleCanvas.width = 1600;
+
+    titleCanvas.height = 120;
+
+
+    titleContext.fillStyle =
+        "#ffffff";
+
+
+    titleContext.fillRect(
+        0,
+        0,
+        titleCanvas.width,
+        titleCanvas.height
+    );
+
+
+    titleContext.fillStyle =
+        "#263247";
+
+
+    titleContext.font =
+        "700 58px 'DM Sans', Arial, sans-serif";
+
+
+    titleContext.textBaseline =
+        "middle";
+
+
+    titleContext.fillText(
+
+        "Programul meu de lectură",
+
+        20,
+
+        60
+
+    );
+
+
+    const titleImage =
+        titleCanvas.toDataURL(
+            "image/png"
+        );
+
+
+    /*
+     ========================================================
+     ADAUGĂ TITLUL
+     ========================================================
+    */
+
+    pdf.addImage(
+
+        titleImage,
+
+        "PNG",
+
+        margin,
+
+        3,
+
+        130,
+
+        10
+
+    );
+
+
+    /*
+     ========================================================
+     ADAUGĂ TABELUL
+     ========================================================
+    */
+
+    const top = 16;
+
+
+    pdf.addImage(
+
+        imgData,
+
+        "PNG",
+
+        margin,
+
+        top,
+
+        availableWidth,
+
+        Math.min(
+
+            imageHeight,
+
+            pageHeight -
+            top -
+            margin
+
+        )
+
+    );
+
+
+    /*
+     ========================================================
+     NUMELE FIȘIERULUI
+     ========================================================
+    */
+
+    pdf.save(
+        "Programul-meu-de-lectură.pdf"
+    );
+
+
+    showToast(
+        "PDF-ul a fost creat."
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>
