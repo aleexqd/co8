@@ -63,6 +63,7 @@ html{
   min-height:100%;
   overflow-x:hidden;
   overflow-y:scroll;
+  touch-action: pan-y;
 }
 
 body{
@@ -1848,12 +1849,12 @@ body.clean-mode header h1{
 
         <div class="initial-legend-item">
           <span class="initial-legend-icon">↔️</span>
-          <span><strong>Navigare:</strong> Schimbă întrebările (<span class="initial-legend-key">←</span> <span class="initial-legend-key">→</span>)</span>
+          <span><strong>Navigare:</strong> Schimbă întrebările (<span class="initial-legend-key">←</span> <span class="initial-legend-key">→</span> sau Swipe stânga/dreapta)</span>
         </div>
       </div>
 
       <div class="initial-legend-note">
-        💡 <em>Notă: Derularea paginii prin scroll (roata mausului sau gesture) funcționează complet și în Modul Clean, chiar dacă cursorul nu este vizibil.</em>
+        💡 <em>Notă: Derularea paginii prin scroll funcționează complet și în Modul Clean. Glisarea stânga/dreapta schimbă pagina în mod continuu fără a reseta timerul.</em>
       </div>
     </div>
   </div>
@@ -2862,6 +2863,41 @@ document.addEventListener(
 
 
 /* =========================================================
+   GESTURI DE GLISARE (SWIPE) PE MOBIL & FULLSCREEN
+   ========================================================= */
+
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+document.addEventListener('touchend', e => {
+  touchEndX = e.changedTouches[0].screenX;
+  touchEndY = e.changedTouches[0].screenY;
+  handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+  const diffX = touchEndX - touchStartX;
+  const diffY = touchEndY - touchStartY;
+
+  // Verificăm dacă mișcarea a fost preponderent orizontală
+  if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+    if (diffX < 0) {
+      next();
+    } else {
+      prev();
+    }
+  }
+}
+
+
+/* =========================================================
    MOD ZI / NOAPTE
    ========================================================= */
 
@@ -3251,6 +3287,8 @@ function setupTimerFrame(){
 
 function setTimerProgress(fraction){
   const safe = Math.min(1, Math.max(0, fraction));
+  // Sens unic de umplere (de la 1 la 0 pe proprietatea dashoffset cu pathLength="1")
+  answerTimerProgress.style.strokeDasharray = "1";
   answerTimerProgress.style.strokeDashoffset = String(1 - safe);
 }
 
