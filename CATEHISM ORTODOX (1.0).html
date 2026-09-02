@@ -62,7 +62,7 @@ html{
   width:100%;
   min-height:100%;
   overflow-x:hidden;
-  overflow-y:scroll; /* Forțează o singură bară principală fluidă pe întreaga pagină */
+  overflow-y:scroll;
 }
 
 body{
@@ -70,7 +70,7 @@ body{
   padding:0;
   width:100%;
   min-height:100vh;
-  overflow:visible; /* Elimină complet a doua bară de scroll */
+  overflow:visible;
   font-family:
     Georgia,
     "Times New Roman",
@@ -982,7 +982,7 @@ body.dark-mode .dot.active{
   position:relative;
   flex:0 0 auto;
   min-width:0;
-  padding:3px;
+  padding:12px;
   border-radius:12px;
 }
 
@@ -1005,16 +1005,16 @@ body.dark-mode .dot.active{
 
 .answer-timer-track{
   stroke:rgba(210,220,235,.72);
-  stroke-width:2;
+  stroke-width:3;
 }
 
 .answer-timer-progress{
   stroke:#e2bd45;
-  stroke-width:2.5;
+  stroke-width:3.5;
   stroke-dasharray:1;
   stroke-dashoffset:1;
   transition:stroke-dashoffset .2s linear;
-  filter:drop-shadow(0 0 2px rgba(226,189,69,.45));
+  filter:drop-shadow(0 0 3px rgba(226,189,69,.6));
 }
 
 body.dark-mode .answer-timer-track{
@@ -1306,7 +1306,7 @@ body.dark-mode .bookmark-btn.saved{
 .timer-command{
   padding:8px 7px;
   font-size:.78rem;
-  border-radius:9px;
+  border-radius:99px;
   background:#edf3ff;
   color:#1646a0;
 }
@@ -1619,11 +1619,11 @@ body.clean-mode *{
 }
 
 html.clean-mode{
-  scrollbar-width:none !important; /* Ascunde bara în Firefox */
+  scrollbar-width:none !important;
 }
 
 html.clean-mode::-webkit-scrollbar{
-  display:none !important; /* Ascunde bara în Chrome, Safari, Edge */
+  display:none !important;
   width:0 !important;
   height:0 !important;
 }
@@ -1681,7 +1681,7 @@ body.clean-mode header h1{
 }
 
 @media(max-width:600px){
-  .answer-shell{padding:2px}
+  .answer-shell{padding:6px}
   .bookmark-btn,.timer-btn,.clean-btn{width:28px;height:28px;font-size:.92rem}
   .study-modal{padding:23px 18px 20px;border-radius:19px}
   .study-prayer{font-size:.98rem;line-height:1.52}
@@ -1729,8 +1729,6 @@ body.clean-mode header h1{
   <h1>
     ☦ Catehism Ortodox
   </h1>
-
-  <!-- BUTON ZI / NOAPTE -->
 
   <button
     class="theme-toggle"
@@ -2181,7 +2179,7 @@ q:
 "Când s-a dat oamenilor Descoperirea supranaturală?",
 
 a:
-`Această Descoperire s-a dat de la facerea primilor oameni, în Rai, până la venirea Mântuitorului, care a încunanat și a desăvârșit Descoperirea. Această lungă durată – 50508 ani – se poate împărți în trei părți.
+`Această Descoperire s-a dat de la facerea primilor oameni, în Rai, până la venirea Mântuitorului, care a încunanat și a desăvârșit Descoperirea. Această lungă durată – 5508 ani – se poate împărți în trei părți.
 
 Cea dintâi se întinde de la facerea primilor oameni până la darea Legii Vechiului Testament. Această primă parte se împarte la rândul ei în două: 1) de la facerea primilor oameni până la căderea în păcat; 2) după căderea în păcat. Descoperirea se înfățișează potrivit stării omului din aceste două răstimpuri. În Rai, omul s-a bucurat de o Descoperire directă din partea lui Dumnezeu, Care-i vorbea personal. Dumnezeu îl povățuia și-l conducea direct, îl învăța despre Sine, despre legătura Sa cu omul și rostul acestuia în lume și petrecea împreună cu acest om.
 
@@ -3125,7 +3123,6 @@ const pagesModeContent = document.getElementById("pagesModeContent");
 const pageStartInput = document.getElementById("pageStartInput");
 const pageEndInput = document.getElementById("pageEndInput");
 
-// Elementele din ecranul inițial
 const tabPagesInit = document.getElementById("tabPagesInit");
 const tabTimeInit = document.getElementById("tabTimeInit");
 const pagesModeContentInit = document.getElementById("pagesModeContentInit");
@@ -3140,7 +3137,7 @@ const studyButton = document.getElementById("studyButton");
 const completionOverlay = document.getElementById("completionOverlay");
 const prayerRain = document.getElementById("prayerRain");
 
-let currentTab = "pages"; // "time" sau "pages" - Implicit pe Pagini conform cerinței
+let currentTab = "pages";
 let timerDuration = 0;
 let timerRemaining = 0;
 let timerStartedAt = 0;
@@ -3153,7 +3150,6 @@ let timerQuestion = current;
 let pageStartVal = 1;
 let pageEndVal = 10;
 
-// Setări de sincronizare taburi
 function switchTab(mode){
   currentTab = mode;
   if(mode === "time"){
@@ -3191,7 +3187,6 @@ tabPages.addEventListener("click", ()=> switchTab("pages"));
 tabTimeInit.addEventListener("click", ()=> switchTab("time"));
 tabPagesInit.addEventListener("click", ()=> switchTab("pages"));
 
-// Preset-uri timp
 document.querySelectorAll(".timer-preset").forEach(button=>{
   button.addEventListener("click", ()=>{
     const mins = button.dataset.minutes;
@@ -3247,11 +3242,10 @@ function setupTimerFrame(){
     const readPages = Math.max(0, currPage - pageStartVal + 1);
     const frac = Math.min(1, readPages / totalPages);
     setTimerProgress(frac);
+  } else if(currentTab === "time" && timerDuration > 0) {
+    setTimerProgress(1 - timerRemaining / timerDuration);
   } else {
-    answerTimerProgress.style.strokeDashoffset =
-      timerDuration > 0
-        ? String(Math.max(0, 1 - (1 - timerRemaining / timerDuration)))
-        : "1";
+    setTimerProgress(0);
   }
 }
 
@@ -3325,14 +3319,12 @@ function positionTimerPopover(){
 }
 
 function startTimerFlow(fromInit = false){
-  // Activăm Full Screen și Modul Clean la configurarea timerului
   enterFullscreenAuto();
   if(!document.body.classList.contains("clean-mode")){
     toggleCleanMode();
   }
 
   if(fromInit){
-    // Ascundem definitiv secțiunea inițială și afișăm conținutul de studiu
     document.getElementById("setupSection").style.display = "none";
     document.getElementById("studyContent").style.display = "block";
     document.getElementById("floatingTools").style.display = "flex";
@@ -3385,18 +3377,20 @@ function actuallyStartTimer(){
   timerRunning = true;
   timerPaused = false;
 
-  if(currentTab === "time"){
-    timerStartedAt = performance.now();
-    timerPausedElapsed = 0;
-    timerCommands.style.display = "grid";
-    timerPause.textContent = "Ⅱ Pauză";
-    runTimerFrame();
-  } else {
-    timerCommands.style.display = "grid";
-    timerPause.style.display = "none";
+  requestAnimationFrame(() => {
     setupTimerFrame();
-    updateTooltipText();
-  }
+    if(currentTab === "time"){
+      timerStartedAt = performance.now();
+      timerPausedElapsed = 0;
+      timerCommands.style.display = "grid";
+      timerPause.textContent = "Ⅱ Pauză";
+      runTimerFrame();
+    } else {
+      timerCommands.style.display = "grid";
+      timerPause.style.display = "none";
+      updateTooltipText();
+    }
+  });
 }
 
 function checkPageModeCompletion(){
@@ -3497,7 +3491,6 @@ function showCompletionRain(){
 function closeCompletion(){
   completionOverlay.style.display = "none";
   document.body.style.overflow = "";
-  // Ieșire automată din Modul Clean la finalizarea studiului
   document.body.classList.remove("clean-mode");
   document.documentElement.classList.remove("clean-mode");
 }
